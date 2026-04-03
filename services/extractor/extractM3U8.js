@@ -4,8 +4,6 @@ export async function extractVideoData(pageUrl, signal) {
   let browser = null;
 
   try {
-    if (signal?.aborted) throw new Error("aborted");
-
     browser = await puppeteer.launch({
       headless: "new",
       args: [
@@ -13,205 +11,95 @@ export async function extractVideoData(pageUrl, signal) {
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage",
         "--disable-blink-features=AutomationControlled",
+        "--disable-features=IsolateOrigins,site-per-process", // Permite acceso a iframes cross-origin
       ],
     });
 
     const page = await browser.newPage();
-
-    let found = false;
-    let stream = null;
-    let subtitles = [];
-
-    // 🔥 control
-    const blockedHosts = ["vsembed.ru"]; // basura infinita
-    const visited = new Set();
-
-    const checkAbort = async () => {
-      if (signal?.aborted) {
-        found = true;
-        try { await page.close(); } catch {}
-        try { await browser?.close(); } catch {}
-        throw new Error("aborted");
-      }
-    };
-
-    // 🧠 stealth
-    await page.evaluateOnNewDocument(() => {
-      Object.defineProperty(navigator, "webdriver", {
-        get: () => false,
-      });
-
-      const fakeSW = {
-        installing: null,
-        waiting: null,
-        active: null,
-        scope: "",
-        update: () => Promise.resolve(),
-        unregister: () => Promise.resolve(true),
-      };
-
-      navigator.serviceWorker.register = () => Promise.resolve(fakeSW);
-
-      Object.defineProperty(navigator.serviceWorker, "ready", {
-        get: () => Promise.resolve(fakeSW),
-      });
-    });
-
-    await page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-    );
-
-    await page.setViewport({ width: 1366, height: 768 });
+    
+    // Almacén de resultados
+    const result = { stream: null, subtitles: new Set() };
+    
+    // Promesa que se resuelve cuando encontramos el stream
+    let resolveStream;
+    const streamFoundPromise = new Promise((resolve) => { resolveStream = resolve; });
 
     await page.setRequestInterception(true);
 
-    // =========================
-    // 🔥 REQUEST
-    // =========================
     page.on("request", (req) => {
-      if (found || signal?.aborted) return req.abort();
-
       const url = req.url();
+      const type = req.resourceType();
 
-      if (!stream && url.includes(".m3u8")) {
-        console.log("🔥 stream:", url);
-        stream = url;
-        found = true;
+      // 1. Bloqueo de basura (Ahorra ancho de banda y CPU)
+      if (["image", "stylesheet", "font", "media"].includes(type) && !url.includes(".m3u8")) {
+        return req.abort();
+      }
+      
+      // Bloquear dominios de publicidad conocidos (expandir según sea necesario)
+      if (url.includes("vsembed.ru") || url.includes("doubleclick") || url.includes("analytics")) {
+        return req.abort();
       }
 
+      // 2. Captura de Stream
+      if (url.includes(".m3u8") || url.includes(".mp4")) {
+        result.stream = url;
+        resolveStream(); 
+        return req.continue();
+      }
+
+      // 3. Captura de Subtítulos
       if (url.includes(".vtt") || url.includes(".srt")) {
-        subtitles.push(url);
+        result.subtitles.add(url);
       }
 
       req.continue();
     });
 
-    // =========================
-    // 🔥 RESPONSE
-    // =========================
-    page.on("response", async (res) => {
-      if (found || signal?.aborted) return;
+    // Manejo de Abort externo
+    signal?.addEventListener("abort", () => resolveStream());
 
-      try {
-        const url = res.url();
+    try {
+      // Navegación rápida
+      await page.goto(pageUrl, {
+        waitUntil: "domcontentloaded", // No esperamos a que cargue todo
+        timeout: 10000,
+      });
 
-        if (url.includes(".m3u8")) {
-          console.log("🔥 stream (response):", url);
-          stream = url;
-          found = true;
-          return;
-        }
-
-        if (url.includes("source") || url.includes("videasy")) {
-          const text = await res.text();
-
-          const match = text.match(/https?:\/\/.*?\.m3u8/);
-          if (match) {
-            console.log("🔥 stream (json):", match[0]);
-            stream = match[0];
-            found = true;
-            return;
-          }
-
-          const subs = text.match(/https?:\/\/.*?\.vtt/g);
-          if (subs) subtitles.push(...subs);
-        }
-      } catch {}
-    });
-
-    // =========================
-    // 🚀 LOAD
-    // =========================
-    await checkAbort();
-
-    await page.goto(pageUrl, {
-      waitUntil: "domcontentloaded",
-      timeout: 15000,
-    });
-
-    await checkAbort();
-
-    await page.mouse.click(300, 300).catch(() => {});
-    await page.click("video").catch(() => {});
-
-    // =========================
-    // 🔥 LOOP (OPTIMIZADO)
-    // =========================
-    const start = Date.now();
-
-    while (!found && Date.now() - start < 8000) {
-      await checkAbort();
-
-      const frames = page.frames();
-
-      for (const frame of frames) {
-        if (found) break;
-
+      // Simular interacción mínima para disparar players perezosos
+      const triggerExtraction = async () => {
         try {
-          const url = frame.url();
-
-          // 🔥 evitar repetir
-          if (visited.has(url)) continue;
-          visited.add(url);
-
-          // 🔥 bloquear basura
-          if (blockedHosts.some((h) => url.includes(h))) continue;
-
-          // 🔥 logs útiles
-          if (url.includes("vidking") || url.includes("player")) {
-            console.log("🧠 iframe:", url);
-          }
-
-          if (
-            url.includes("embed") ||
-            url.includes("player") ||
-            url.includes("video")
-          ) {
-            await frame.evaluate(() => {
-              document.body.click();
-            }).catch(() => {});
-
-            const video = await frame.$("video");
-            if (video) await video.click().catch(() => {});
-
-            const btn = await frame.$("button");
-            if (btn) await btn.click().catch(() => {});
-          }
-        } catch {}
-      }
-
-      await new Promise((r) => setTimeout(r, 300));
-    }
-
-    // =========================
-    // ✅ RESULT
-    // =========================
-    if (stream) {
-      console.log("✅ STREAM FINAL:", stream);
-
-      try { await page.close(); } catch {}
-      try { await browser.close(); } catch {}
-
-      return {
-        stream,
-        subtitles: [...new Set(subtitles)],
+          await page.mouse.click(300, 300);
+          // Intentar clickear en cualquier video o botón de play en frames
+          await page.evaluate(() => {
+            const video = document.querySelector("video");
+            if (video) video.play();
+            const btn = document.querySelector('button[class*="play" i], div[class*="play" i]');
+            if (btn) btn.click();
+          });
+        } catch (e) {}
       };
+
+      triggerExtraction();
+
+      // Esperar a: Encontrar stream, Timeout de 8s, o Abort
+      await Promise.race([
+        streamFoundPromise,
+        new Promise((resolve) => setTimeout(resolve, 8000)),
+      ]);
+
+    } catch (err) {
+      console.log("⚠️ Navegación incompleta, pero buscando en logs...");
     }
 
-    return { stream: null, subtitles: [] };
+    return {
+      stream: result.stream,
+      subtitles: [...result.subtitles],
+    };
 
   } catch (e) {
-    if (e?.message === "aborted") {
-      console.log("⏱️ puppeteer abortado:", pageUrl);
-    } else {
-      console.log("💀 error:", pageUrl, e);
-    }
-
+    console.error("💀 Error fatal:", e.message);
     return { stream: null, subtitles: [] };
-
   } finally {
-    if (browser) {
-      try { await browser.close(); } catch {}
-    }
+    if (browser) await browser.close();
   }
 }

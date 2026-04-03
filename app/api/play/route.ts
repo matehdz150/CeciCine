@@ -31,10 +31,27 @@ export async function GET(req: NextRequest) {
 
   // 🥇 mejor ordenados (más rápidos primero)
   const providers = [
-        (id: string) => `https://www.vidking.net/embed/movie/${id}`,
+    // 🥇 los que ya sabes que jalan
+    (id: string) => `https://www.vidking.net/embed/movie/${id}`,
     (id: string) => `https://vidsrc.xyz/embed/movie/${id}`,
     (id: string) => `https://player.vidplus.to/embed/movie/${id}`,
+
+    // 🟢 buenos alternativos
+    (id: string) => `https://vidsrc.me/embed/movie/${id}`,
+    (id: string) => `https://vidsrc.to/embed/movie/${id}`,
+    (id: string) => `https://vidsrc.dev/embed/movie/${id}`,
+
+    // 🟡 funcionan a veces
+    (id: string) => `https://multiembed.mov/?video_id=${id}&tmdb=1`,
+    (id: string) => `https://embed.su/embed/movie/${id}`,
+    (id: string) => `https://moviesapi.club/movie/${id}`,
+
+    // 🟡 clones (a veces redirigen a bueno)
     (id: string) => `https://vidsrc.pm/embed/movie/${id}`,
+    (id: string) => `https://vidsrc.net/embed/movie/${id}`,
+
+    // 🔴 fallback agresivo
+    (id: string) => `https://autoembed.cc/embed/movie/${id}`,
   ];
 
   for (const buildUrl of providers) {
