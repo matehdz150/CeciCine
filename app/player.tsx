@@ -33,7 +33,8 @@ function getLangLabel(lang: string) {
 
   if (normalized.includes("es")) return "Español";
   if (normalized.includes("en")) return "English";
-  if (normalized.includes("pt") || normalized.includes("pb")) return "Português";
+  if (normalized.includes("pt") || normalized.includes("pb"))
+    return "Português";
   if (normalized.includes("fr")) return "Français";
   if (normalized.includes("it")) return "Italiano";
   if (normalized.includes("de")) return "Deutsch";
@@ -73,12 +74,15 @@ export default function Player({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  const [selectedSubtitleUrl, setSelectedSubtitleUrl] = useState<string | null>(null);
+  const [selectedSubtitleUrl, setSelectedSubtitleUrl] = useState<string | null>(
+    null,
+  );
   const [subtitleMenuOpen, setSubtitleMenuOpen] = useState(false);
 
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const selectedSubtitle = subtitles.find((s) => s.url === selectedSubtitleUrl) || null;
+  const selectedSubtitle =
+    subtitles.find((s) => s.url === selectedSubtitleUrl) || null;
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -86,9 +90,18 @@ export default function Player({
     const video = videoRef.current;
 
     if (Hls.isSupported()) {
-      const hls = new Hls();
+      const hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: true,
+      });
+
       hls.loadSource(src);
       hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.muted = true; // 🔥 clave para autoplay
+        video.play().catch(() => {});
+      });
 
       return () => hls.destroy();
     }
@@ -213,7 +226,10 @@ export default function Player({
     if (videoRef.current && Number.isFinite(videoRef.current.duration)) {
       videoRef.current.currentTime = Math.max(
         0,
-        Math.min(videoRef.current.duration, percent * videoRef.current.duration),
+        Math.min(
+          videoRef.current.duration,
+          percent * videoRef.current.duration,
+        ),
       );
     }
   };
@@ -227,7 +243,10 @@ export default function Player({
     if (x < rect.width / 2) {
       video.currentTime = Math.max(0, video.currentTime - 10);
     } else {
-      video.currentTime = Math.min(video.duration || Infinity, video.currentTime + 10);
+      video.currentTime = Math.min(
+        video.duration || Infinity,
+        video.currentTime + 10,
+      );
     }
   };
 
@@ -257,7 +276,10 @@ export default function Player({
           togglePlay();
           break;
         case "ArrowRight":
-          video.currentTime = Math.min(video.duration || Infinity, video.currentTime + 10);
+          video.currentTime = Math.min(
+            video.duration || Infinity,
+            video.currentTime + 10,
+          );
           break;
         case "ArrowLeft":
           video.currentTime = Math.max(0, video.currentTime - 10);
@@ -283,11 +305,7 @@ export default function Player({
       onMouseMove={handleMouseMove}
       onDoubleClick={handleDoubleClick}
     >
-      <video
-        ref={videoRef}
-        autoPlay
-        className="h-full w-full object-contain"
-      >
+      <video ref={videoRef} autoPlay className="h-full w-full object-contain">
         <track ref={trackRef} kind="subtitles" label="Subtitles" />
       </video>
 
@@ -364,7 +382,9 @@ export default function Player({
               >
                 <Languages size={16} />
                 <span>
-                  {selectedSubtitle ? getLangLabel(selectedSubtitle.lang) : "Subtitles"}
+                  {selectedSubtitle
+                    ? getLangLabel(selectedSubtitle.lang)
+                    : "Subtitles"}
                 </span>
               </button>
 
@@ -419,7 +439,9 @@ export default function Player({
                         }`}
                       >
                         <div>
-                          <p className="font-medium">{getLangLabel(sub.lang)}</p>
+                          <p className="font-medium">
+                            {getLangLabel(sub.lang)}
+                          </p>
                           <p className="text-xs text-white/45">
                             {sub.lang?.toUpperCase() || "UNKNOWN"}
                           </p>

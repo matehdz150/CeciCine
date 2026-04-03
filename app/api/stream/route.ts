@@ -12,16 +12,18 @@ export async function GET(req: NextRequest) {
       "User-Agent": "Mozilla/5.0",
       Referer: "https://www.vidking.net/",
       Origin: "https://www.vidking.net",
+      Accept: "*/*",
+      Connection: "keep-alive",
+      ...(req.headers.get("range") && {
+        Range: req.headers.get("range")!,
+      }),
     },
   });
 
   const contentType = res.headers.get("content-type") || "";
 
-  // 🎯 CASO 1: PLAYLIST (.m3u8)
-  if (
-    contentType.includes("application/vnd.apple.mpegurl") ||
-    contentType.includes("application/x-mpegURL")
-  ) {
+  // 🎯 PLAYLIST
+  if (contentType.includes("mpegurl") || url.includes(".m3u8")) {
     let text = await res.text();
     const base = new URL(url);
 
@@ -38,19 +40,22 @@ export async function GET(req: NextRequest) {
 
     return new Response(text, {
       headers: {
-        "Content-Type": contentType,
+        "Content-Type": "application/vnd.apple.mpegurl",
         "Access-Control-Allow-Origin": "*",
       },
     });
   }
 
-  // 🎯 CASO 2: SEGMENTOS (.ts, .mp4, etc)
+  // 🎯 SEGMENTOS
   const buffer = await res.arrayBuffer();
 
   return new Response(buffer, {
+    status: res.status,
     headers: {
       "Content-Type": contentType,
       "Access-Control-Allow-Origin": "*",
+      "Accept-Ranges": "bytes",
+      "Content-Length": res.headers.get("content-length") || "",
     },
   });
 }

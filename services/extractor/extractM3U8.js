@@ -1,10 +1,7 @@
-import puppeteer, { Browser } from "puppeteer";
+import puppeteer from "puppeteer";
 
-export async function extractVideoData(
-  pageUrl: string,
-  signal?: AbortSignal
-) {
-  let browser: Browser | null = null;
+export async function extractVideoData(pageUrl, signal) {
+  let browser = null;
 
   try {
     if (signal?.aborted) throw new Error("aborted");
@@ -22,19 +19,15 @@ export async function extractVideoData(
     const page = await browser.newPage();
 
     let found = false;
-    let stream: string | null = null;
-    let subtitles: string[] = [];
+    let stream = null;
+    let subtitles = [];
 
-    // 🔥 helper para abort limpio
+    // 🔥 helper abort
     const checkAbort = async () => {
       if (signal?.aborted) {
         found = true;
-        try {
-          await page.close();
-        } catch {}
-        try {
-          await browser?.close();
-        } catch {}
+        try { await page.close(); } catch {}
+        try { await browser?.close(); } catch {}
         throw new Error("aborted");
       }
     };
@@ -54,8 +47,7 @@ export async function extractVideoData(
         unregister: () => Promise.resolve(true),
       };
 
-      navigator.serviceWorker.register = () =>
-        Promise.resolve(fakeSW as any);
+      navigator.serviceWorker.register = () => Promise.resolve(fakeSW);
 
       Object.defineProperty(navigator.serviceWorker, "ready", {
         get: () => Promise.resolve(fakeSW),
@@ -73,7 +65,7 @@ export async function extractVideoData(
     // =========================
     // 🔥 REQUEST
     // =========================
-    page.on("request", (req: any) => {
+    page.on("request", (req) => {
       if (found || signal?.aborted) return req.abort();
 
       const url = req.url();
@@ -94,7 +86,7 @@ export async function extractVideoData(
     // =========================
     // 🔥 RESPONSE
     // =========================
-    page.on("response", async (res: any) => {
+    page.on("response", async (res) => {
       if (found || signal?.aborted) return;
 
       try {
@@ -144,7 +136,7 @@ export async function extractVideoData(
     await page.click("video").catch(() => {});
 
     // =========================
-    // 🔥 LOOP CONTROLADO
+    // 🔥 LOOP
     // =========================
     const start = Date.now();
 
@@ -179,24 +171,14 @@ export async function extractVideoData(
         } catch {}
       }
 
-      if (found) break;
-
       await new Promise((r) => setTimeout(r, 400));
     }
 
-    // =========================
-    // 🔥 EARLY EXIT REAL
-    // =========================
     if (stream) {
       console.log("✅ STREAM FINAL:", stream);
 
-      try {
-        await page.close();
-      } catch {}
-
-      try {
-        await browser.close();
-      } catch {}
+      try { await page.close(); } catch {}
+      try { await browser.close(); } catch {}
 
       return {
         stream,
@@ -205,7 +187,7 @@ export async function extractVideoData(
     }
 
     return { stream: null, subtitles: [] };
-  } catch (e: any) {
+  } catch (e) {
     if (e?.message === "aborted") {
       console.log("⏱️ puppeteer abortado:", pageUrl);
     } else {
@@ -215,9 +197,7 @@ export async function extractVideoData(
     return { stream: null, subtitles: [] };
   } finally {
     if (browser) {
-      try {
-        await browser.close();
-      } catch {}
+      try { await browser.close(); } catch {}
     }
   }
 }

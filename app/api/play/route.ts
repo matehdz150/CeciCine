@@ -2,21 +2,18 @@ import { extractVideoData } from "@/lib/extractM3U8";
 import { getWyzieSubs } from "@/lib/getSubs";
 import { NextRequest } from "next/server";
 
-// ⏱️ timeout helper
-function withTimeout<T>(promise: Promise<T>, ms: number) {
-  return new Promise<T>((resolve, reject) => {
-    const timer = setTimeout(() => reject("timeout"), ms);
+// 🔥 cache simple (puedes cambiar a Redis después)
+const cache = new Map<string, any>();
 
-    promise
-      .then((res) => {
-        clearTimeout(timer);
-        resolve(res);
-      })
-      .catch((err) => {
-        clearTimeout(timer);
-        reject(err);
-      });
-  });
+// ⏱️ timeout + abort real
+function withTimeout<T>(fn: (signal: AbortSignal) => Promise<T>, ms: number) {
+  const controller = new AbortController();
+
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, ms);
+
+  return fn(controller.signal).finally(() => clearTimeout(timeout));
 }
 
 export async function GET(req: NextRequest) {
@@ -26,43 +23,51 @@ export async function GET(req: NextRequest) {
     return Response.json({ success: false });
   }
 
-  // 🥇 ordenados por confiabilidad
+  // ⚡ CACHE HIT
+  if (cache.has(tmdbId)) {
+    console.log("⚡ cache hit:", tmdbId);
+    return Response.json(cache.get(tmdbId));
+  }
+
+  // 🥇 mejor ordenados (más rápidos primero)
   const providers = [
+    (id: string) => `https://vidsrc.xyz/embed/movie/${id}`,
     (id: string) => `https://www.vidking.net/embed/movie/${id}`,
     (id: string) => `https://player.vidplus.to/embed/movie/${id}`,
-    (id: string) => `https://vidsrc.xyz/embed/movie/${id}`,
     (id: string) => `https://vidsrc.pm/embed/movie/${id}`,
   ];
 
-  // 🔥 ejecución en serie (LA CLAVE)
   for (const buildUrl of providers) {
     const url = buildUrl(tmdbId);
 
     console.log("🔍 probando:", url);
 
     try {
-      const data = await withTimeout(
-        extractVideoData(url),
-        6000 // ⏱️ máximo por provider
-      );
+      const controller = new AbortController();
+
+      setTimeout(() => controller.abort(), 8000);
+
+      const data = await fetch(
+        `http://extractor:3005/extract?url=${encodeURIComponent(url)}`,
+        { signal: controller.signal },
+      ).then((r) => r.json());
 
       if (!data.stream) {
         console.log("❌ sin stream:", url);
         continue;
       }
 
-      console.log("✅ ganador:", url);
+      console.log("🏆 ganador:", url);
 
-      // 🔥 WYZE SUBS (source of truth)
+      // 🎬 SUBS
       let wyzieSubs: any[] = [];
 
       try {
         wyzieSubs = await getWyzieSubs(tmdbId);
-      } catch (e) {
-        console.log("⚠️ wyzie fallo", e);
+      } catch {
+        console.log("⚠️ wyzie fallback");
       }
 
-      // 🔥 fallback → provider subs
       const finalSubs =
         wyzieSubs.length > 0
           ? wyzieSubs
@@ -71,7 +76,7 @@ export async function GET(req: NextRequest) {
               lang: "unknown",
             }));
 
-      return Response.json({
+      const result = {
         success: true,
         stream: `/api/stream?url=${encodeURIComponent(data.stream)}`,
         subtitles: finalSubs.map((s: any) => ({
@@ -79,13 +84,21 @@ export async function GET(req: NextRequest) {
           lang: s.lang,
         })),
         provider: url,
-      });
-    } catch (e) {
-      console.log("💀 fallo:", url, e);
+      };
+
+      // 💾 guardar cache
+      cache.set(tmdbId, result);
+
+      return Response.json(result);
+    } catch (e: any) {
+      if (e?.name === "AbortError") {
+        console.log("⏱️ timeout:", url);
+      } else {
+        console.log("💀 error:", url, e?.message || e);
+      }
     }
   }
 
-  // ❌ ningún provider funcionó
   return Response.json({
     success: false,
     error: "no provider worked",
