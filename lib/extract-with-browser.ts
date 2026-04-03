@@ -2,7 +2,7 @@ import puppeteer from "puppeteer";
 
 export async function extractStreamFromNetwork(url: string) {
   const browser = await puppeteer.launch({
-    headless: "new",
+    headless: true,
   });
 
   const page = await browser.newPage();
