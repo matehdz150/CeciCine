@@ -1,12 +1,14 @@
 import puppeteer from "puppeteer";
-import chromium from "@sparticuz/chromium";
 
 export async function extractVideoData(pageUrl: string) {
   const browser = await puppeteer.launch({
-  args: chromium.args,
-  executablePath: await chromium.executablePath(),
-  headless: true,
-});
+    headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
+  });
 
   try {
     const page = await browser.newPage();
