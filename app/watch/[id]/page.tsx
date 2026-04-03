@@ -7,25 +7,22 @@ import { ArrowLeft, Calendar, Flame, Globe, Star } from "lucide-react";
 
 export default function Page() {
   const router = useRouter();
-
   const params = useParams();
   const id = params?.id as string;
 
   const [movie, setMovie] = useState<any>(null);
   const [stream, setStream] = useState<string | null>(null);
-  const [subtitles, setSubtitles] = useState<{ url: string; lang: string }[]>(
-    [],
-  );
+  const [subtitles, setSubtitles] = useState<
+    { url: string; lang: string }[]
+  >([]);
   const [loadingStream, setLoadingStream] = useState(false);
 
-  // 🎬 fetch info película
   useEffect(() => {
     fetch(`/api/movie?id=${id}`)
       .then((r) => r.json())
       .then((data) => setMovie(data));
   }, [id]);
 
-  // ▶️ play
   const handlePlay = async () => {
     setLoadingStream(true);
 
@@ -37,7 +34,6 @@ export default function Page() {
     setLoadingStream(false);
   };
 
-  // ⛔ loading inicial
   if (!movie) {
     return (
       <div className="h-screen flex items-center justify-center bg-black text-white">
@@ -46,13 +42,13 @@ export default function Page() {
     );
   }
 
-  // 🎬 PLAYER MODE
+  // 🎬 PLAYER
   if (stream) {
     return (
       <div className="bg-black min-h-screen">
         <button
           onClick={() => setStream(null)}
-          className="absolute top-6 left-6 z-50 text-white bg-black/50 px-4 py-2 rounded-full backdrop-blur"
+          className="absolute top-4 left-4 z-50 text-white bg-black/60 px-3 py-1.5 text-sm rounded-full backdrop-blur"
         >
           ← Volver
         </button>
@@ -62,67 +58,72 @@ export default function Page() {
     );
   }
 
-  // 🎨 HERO UI
   return (
     <div className="bg-black min-h-screen text-white">
-      {/* BACKDROP */}
-      <div className="relative h-[70vh] w-full">
+      {/* HERO */}
+      <div className="relative w-full h-[55vh] sm:h-[70vh]">
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           className="w-full h-full object-cover"
         />
 
         {/* overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-t from-black via-black/70 to-transparent" />
 
         {/* top bar */}
-        <div className="absolute top-6 left-6 right-6 flex justify-between items-center">
+        <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
           <button
             onClick={() => router.back()}
-            className="text-white/80 hover:text-white flex gap-2"
+            className="text-white/80 text-sm flex gap-2 items-center"
           >
-            <ArrowLeft />
+            <ArrowLeft size={18} />
             Back
           </button>
 
-          <div className="text-sm text-gray-300">Search Movie</div>
+          <div className="text-xs sm:text-sm text-gray-300">
+            Search Movie
+          </div>
         </div>
 
-        {/* CENTER PLAY */}
+        {/* PLAY */}
         <div className="absolute inset-0 flex items-center justify-center">
           <button
             onClick={handlePlay}
-            className="w-20 h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center hover:scale-110 transition"
+            className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white/20 backdrop-blur flex items-center justify-center hover:scale-110 transition"
           >
             ▶
           </button>
         </div>
 
         {/* TITLE */}
-        <div className="absolute bottom-10 left-10">
-          <h1 className="text-4xl font-bold">
+        <div className="absolute bottom-4 sm:bottom-10 left-4 sm:left-10 right-4 sm:right-auto">
+          <h1 className="text-xl sm:text-4xl font-bold leading-tight">
             {movie.title} ({movie.release_date?.slice(0, 4)})
           </h1>
 
-          <p className="text-gray-300 mt-2 max-w-xl">{movie.overview}</p>
+          <p className="text-gray-300 mt-2 text-xs sm:text-sm max-w-xl line-clamp-3 sm:line-clamp-none">
+            {movie.overview}
+          </p>
         </div>
       </div>
 
-      {/* INFO SECTION */}
-      <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-10">
+      {/* INFO */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10">
         {/* POSTER */}
-        <div>
+        <div className="flex justify-center md:block">
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            className="rounded-xl"
+            className="rounded-xl w-[180px] sm:w-full"
           />
         </div>
 
         {/* DETAILS */}
         <div className="md:col-span-2">
-          <h2 className="text-xl font-semibold mb-4">Details</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">
+            Details
+          </h2>
 
-          <div className="text-sm text-gray-300 space-y-3">
+          <div className="text-xs sm:text-sm text-gray-300 space-y-3">
             <div className="flex items-center gap-2">
               <Star size={16} className="text-yellow-400" />
               <span>{movie.vote_average?.toFixed(1)}</span>
@@ -135,7 +136,9 @@ export default function Page() {
 
             <div className="flex items-center gap-2">
               <Globe size={16} className="text-green-400" />
-              <span className="uppercase">{movie.original_language}</span>
+              <span className="uppercase">
+                {movie.original_language}
+              </span>
             </div>
 
             <div className="flex items-center gap-2">
@@ -144,15 +147,19 @@ export default function Page() {
             </div>
           </div>
 
-          <h2 className="text-xl font-semibold mt-8 mb-4">Storyline</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mt-6 sm:mt-8 mb-3 sm:mb-4">
+            Storyline
+          </h2>
 
-          <p className="text-gray-400 leading-relaxed">{movie.overview}</p>
+          <p className="text-gray-400 text-sm leading-relaxed">
+            {movie.overview}
+          </p>
         </div>
       </div>
 
-      {/* LOADING STREAM */}
+      {/* LOADING */}
       {loadingStream && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center text-white">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center text-white text-sm sm:text-base">
           Cargando video...
         </div>
       )}
