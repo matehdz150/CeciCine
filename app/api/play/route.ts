@@ -45,12 +45,16 @@ export async function GET(req: NextRequest) {
     try {
       const controller = new AbortController();
 
-      setTimeout(() => controller.abort(), 8000);
+      setTimeout(() => controller.abort(), 25000);
+
+      console.log("⏱️ esperando extractor...");
 
       const data = await fetch(
         `https://merry-rejoicing-production-7bc7.up.railway.app/extract?url=${encodeURIComponent(url)}`,
         { signal: controller.signal },
       ).then((r) => r.json());
+
+      console.log("📦 extractor response:", data);
 
       if (!data.stream) {
         console.log("❌ sin stream:", url);
