@@ -7,7 +7,7 @@ export async function extractVideoData(pageUrl, signal) {
     if (signal?.aborted) throw new Error("aborted");
 
     browser = await puppeteer.launch({
-      headless: true,
+      headless: "new",
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
@@ -22,7 +22,10 @@ export async function extractVideoData(pageUrl, signal) {
     let stream = null;
     let subtitles = [];
 
-    // 🔥 helper abort
+    // 🔥 control
+    const blockedHosts = ["vsembed.ru"]; // basura infinita
+    const visited = new Set();
+
     const checkAbort = async () => {
       if (signal?.aborted) {
         found = true;
@@ -102,20 +105,16 @@ export async function extractVideoData(pageUrl, signal) {
         if (url.includes("source") || url.includes("videasy")) {
           const text = await res.text();
 
-          if (text.includes(".m3u8")) {
-            const match = text.match(/https?:\/\/.*?\.m3u8/);
-            if (match) {
-              console.log("🔥 stream (json):", match[0]);
-              stream = match[0];
-              found = true;
-              return;
-            }
+          const match = text.match(/https?:\/\/.*?\.m3u8/);
+          if (match) {
+            console.log("🔥 stream (json):", match[0]);
+            stream = match[0];
+            found = true;
+            return;
           }
 
-          if (text.includes(".vtt")) {
-            const matches = text.match(/https?:\/\/.*?\.vtt/g);
-            if (matches) subtitles.push(...matches);
-          }
+          const subs = text.match(/https?:\/\/.*?\.vtt/g);
+          if (subs) subtitles.push(...subs);
         }
       } catch {}
     });
@@ -127,7 +126,7 @@ export async function extractVideoData(pageUrl, signal) {
 
     await page.goto(pageUrl, {
       waitUntil: "domcontentloaded",
-      timeout: 20000,
+      timeout: 15000,
     });
 
     await checkAbort();
@@ -136,11 +135,11 @@ export async function extractVideoData(pageUrl, signal) {
     await page.click("video").catch(() => {});
 
     // =========================
-    // 🔥 LOOP
+    // 🔥 LOOP (OPTIMIZADO)
     // =========================
     const start = Date.now();
 
-    while (!found && Date.now() - start < 15000) {
+    while (!found && Date.now() - start < 8000) {
       await checkAbort();
 
       const frames = page.frames();
@@ -151,13 +150,23 @@ export async function extractVideoData(pageUrl, signal) {
         try {
           const url = frame.url();
 
+          // 🔥 evitar repetir
+          if (visited.has(url)) continue;
+          visited.add(url);
+
+          // 🔥 bloquear basura
+          if (blockedHosts.some((h) => url.includes(h))) continue;
+
+          // 🔥 logs útiles
+          if (url.includes("vidking") || url.includes("player")) {
+            console.log("🧠 iframe:", url);
+          }
+
           if (
             url.includes("embed") ||
             url.includes("player") ||
             url.includes("video")
           ) {
-            console.log("🧠 iframe:", url);
-
             await frame.evaluate(() => {
               document.body.click();
             }).catch(() => {});
@@ -171,9 +180,12 @@ export async function extractVideoData(pageUrl, signal) {
         } catch {}
       }
 
-      await new Promise((r) => setTimeout(r, 400));
+      await new Promise((r) => setTimeout(r, 300));
     }
 
+    // =========================
+    // ✅ RESULT
+    // =========================
     if (stream) {
       console.log("✅ STREAM FINAL:", stream);
 
@@ -187,6 +199,7 @@ export async function extractVideoData(pageUrl, signal) {
     }
 
     return { stream: null, subtitles: [] };
+
   } catch (e) {
     if (e?.message === "aborted") {
       console.log("⏱️ puppeteer abortado:", pageUrl);
@@ -195,6 +208,7 @@ export async function extractVideoData(pageUrl, signal) {
     }
 
     return { stream: null, subtitles: [] };
+
   } finally {
     if (browser) {
       try { await browser.close(); } catch {}
