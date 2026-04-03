@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
       setTimeout(() => controller.abort(), 8000);
 
       const data = await fetch(
-        `http://extractor:3005/extract?url=${encodeURIComponent(url)}`,
+        `https://merry-rejoicing-production-7bc7.up.railway.app/extract?url=${encodeURIComponent(url)}`,
         { signal: controller.signal },
       ).then((r) => r.json());
 
