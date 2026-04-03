@@ -47,9 +47,8 @@ export async function GET(req: NextRequest) {
   }
 
   // 🎯 SEGMENTOS
-  const buffer = await res.arrayBuffer();
-
-  return new Response(buffer, {
+  // 🎯 SEGMENTOS (STREAM REAL 🔥)
+  return new Response(res.body, {
     status: res.status,
     headers: {
       "Content-Type": contentType,
