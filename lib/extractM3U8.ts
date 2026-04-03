@@ -22,7 +22,7 @@ export async function extractVideoData(pageUrl: string) {
     });
 
     await page.setUserAgent(
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
     );
 
     await page.setViewport({
@@ -57,9 +57,7 @@ export async function extractVideoData(pageUrl: string) {
         const json = await res.json();
 
         if (!stream && json?.sources) {
-          const s = json.sources.find((x: any) =>
-            x.file?.includes(".m3u8")
-          );
+          const s = json.sources.find((x: any) => x.file?.includes(".m3u8"));
 
           if (s?.file) {
             console.log("🔥 stream (api):", s.file);
@@ -69,7 +67,7 @@ export async function extractVideoData(pageUrl: string) {
 
         if (json?.tracks) {
           subtitles.push(
-            ...json.tracks.map((t: any) => t.file).filter(Boolean)
+            ...json.tracks.map((t: any) => t.file).filter(Boolean),
           );
         }
       } catch {}
@@ -104,7 +102,7 @@ export async function extractVideoData(pageUrl: string) {
         if (url.includes("embed") || url.includes("player")) {
           console.log("🧠 iframe detectado:", url);
 
-          frame.on("request", (req) => {
+          frame.on("request", (req: any) => {
             const u = req.url();
 
             if (!stream && u.includes(".m3u8")) {
