@@ -6,10 +6,10 @@ import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, Calendar, Flame, Globe, Star } from "lucide-react";
 
 export default function Page() {
-  const params = useParams<{ id: string }>();
   const router = useRouter();
 
-  const id = params.id;
+  const params = useParams();
+  const id = params?.id as string;
 
   const [movie, setMovie] = useState<any>(null);
   const [stream, setStream] = useState<string | null>(null);
@@ -81,7 +81,7 @@ export default function Page() {
             onClick={() => router.back()}
             className="text-white/80 hover:text-white flex gap-2"
           >
-            <ArrowLeft/>
+            <ArrowLeft />
             Back
           </button>
 
