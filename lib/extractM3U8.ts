@@ -2,8 +2,12 @@ import puppeteer from "puppeteer";
 
 export async function extractVideoData(pageUrl: string) {
   const browser = await puppeteer.launch({
-    headless: "shell",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
   });
 
   try {
