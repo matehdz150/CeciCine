@@ -69,7 +69,7 @@ export async function GET(req: NextRequest) {
       
 
       const data = await fetch(
-        `https://merry-rejoicing-production-7bc7.up.railway.app/extract?url=${encodeURIComponent(url)}`,
+        `https://extractormicroservice-production.up.railway.app/extract?url=${encodeURIComponent(url)}`,
         { signal: controller.signal },
       ).then((r) => r.json());
 
