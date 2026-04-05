@@ -4,6 +4,10 @@ import { getStreams } from "@/lib/getStreams";
 export async function GET() {
   const streams = getStreams();
 
+  if (!streams) {
+    return new Response("No streams available", { status: 500 });
+  }
+
   const clean = streams.map((s: any, i: number) => ({
     id: i,
     name: s.name,
