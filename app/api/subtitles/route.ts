@@ -137,7 +137,7 @@ export async function GET(req: NextRequest) {
   // 🔁 dedupe
   // =========================
   const seen = new Set();
-  const unique = subtitles.filter((s) => {
+  const unique = subtitles.filter((s: any) => {
     if (seen.has(s.url)) return false;
     seen.add(s.url);
     return true;
@@ -157,7 +157,7 @@ export async function GET(req: NextRequest) {
   // =========================
   // 🔥 proxy
   // =========================
-  const proxied = unique.map((s) => ({
+  const proxied = unique.map((s: any) => ({
     url: `/api/subtitle?url=${encodeURIComponent(s.url)}`,
     lang: s.lang,
   }));
