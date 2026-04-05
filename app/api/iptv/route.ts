@@ -18,10 +18,7 @@ function buildForwardHeaders(customHeaders: HeaderMap = {}): HeaderMap {
       customHeaders["user-agent"] ||
       customHeaders["User-Agent"] ||
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-    Accept:
-      customHeaders.accept ||
-      customHeaders.Accept ||
-      "*/*",
+    Accept: customHeaders.accept || customHeaders.Accept || "*/*",
   };
 
   if (customHeaders.referer || customHeaders.Referer) {
@@ -89,7 +86,7 @@ function buildProxyUrl(targetUrl: string, headers: HeaderMap) {
 function rewritePlaylist(
   playlistText: string,
   sourceUrl: string,
-  headers: HeaderMap
+  headers: HeaderMap,
 ) {
   const lines = playlistText.split("\n");
 
@@ -110,7 +107,7 @@ function rewritePlaylist(
 async function fetchUpstream(
   url: string,
   headers: HeaderMap,
-  rangeHeader: string | null
+  rangeHeader: string | null,
 ) {
   const upstreamHeaders = buildForwardHeaders(headers);
 
@@ -133,6 +130,10 @@ export async function GET(req: NextRequest) {
 
   const parsedHeaders = safeJsonParse(headersParam);
   const streams = getStreams();
+
+  if (!streams) {
+    return new Response("No streams available", { status: 500 });
+  }
 
   let stream:
     | {
@@ -162,13 +163,15 @@ export async function GET(req: NextRequest) {
   const workingHeaders =
     parsedHeaders && Object.keys(parsedHeaders).length > 0
       ? parsedHeaders
-      : stream.workingHeaders ||
-        stream.headers ||
-        {};
+      : stream.workingHeaders || stream.headers || {};
 
   try {
     const clientRange = req.headers.get("range");
-    const upstream = await fetchUpstream(stream.url, workingHeaders, clientRange);
+    const upstream = await fetchUpstream(
+      stream.url,
+      workingHeaders,
+      clientRange,
+    );
 
     if (!upstream.ok) {
       const text = await upstream.text().catch(() => "");
@@ -206,7 +209,7 @@ export async function GET(req: NextRequest) {
 
     responseHeaders.set(
       "Content-Type",
-      contentType || "application/octet-stream"
+      contentType || "application/octet-stream",
     );
     responseHeaders.set("Access-Control-Allow-Origin", "*");
     responseHeaders.set("Access-Control-Allow-Methods", "GET, OPTIONS");
