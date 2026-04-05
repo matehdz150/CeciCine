@@ -292,13 +292,13 @@ export default function Player({
             </button>
 
             {/* SUBS */}
-            <div className="relative">
+            <div className="relative" onClick={(e) => e.stopPropagation()} >
               <button onClick={() => setSubtitleMenuOpen((p) => !p)}>
                 <Languages size={22} />
               </button>
 
               {subtitleMenuOpen && (
-                <div className="absolute bottom-12 right-0 w-52 bg-black/90 rounded-xl border border-white/10">
+                <div className="absolute bottom-12 right-0 w-52 bg-black/90 rounded-xl border border-white/10" onClick={(e) => e.stopPropagation()} >
                   {subtitles.map((s, i) => (
                     <button
                       key={i}
