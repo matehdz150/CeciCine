@@ -176,14 +176,14 @@ export default function Player({
   // 🔤 SUBS
   // =========================
   useEffect(() => {
-    if (!trackRef.current) return;
+    if (!trackRef.current || !videoRef.current) return;
 
     const track = trackRef.current;
+    const video = videoRef.current;
 
     // 🔥 reset duro
     track.track.mode = "disabled";
     track.removeAttribute("src");
-    track.load?.();
 
     if (!selectedSubtitleUrl) return;
 
@@ -197,10 +197,16 @@ export default function Player({
     // 🔥 set nuevo src
     track.src = finalUrl;
 
-    // 🔥 pequeño delay para que el browser procese
+    // 🔥 importante: marcar como default (ayuda a algunos browsers)
+    track.default = true;
+
+    // 🔥 reload correcto (NO track.load)
+    video.load();
+
+    // 🔥 activar subtítulos
     setTimeout(() => {
       track.track.mode = "showing";
-    }, 50);
+    }, 100);
   }, [selectedSubtitleUrl]);
 
   // =========================
