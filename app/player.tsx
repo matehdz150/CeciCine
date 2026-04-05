@@ -155,7 +155,7 @@ export default function Player({
   // 📱 TAP TOGGLE CONTROLS
   // =========================
   const handleTap = () => {
-    setShowControls((prev) => !prev);
+    setShowControls(true);
   };
 
   // =========================
