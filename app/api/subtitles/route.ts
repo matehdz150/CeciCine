@@ -5,9 +5,29 @@ import { NextRequest } from "next/server";
 const TIMEOUT = 5000;
 
 // =========================
+// 📦 TYPES
+// =========================
+type WyzieSubtitle = {
+  url?: string;
+  language?: string;
+  downloadCount?: number;
+  release?: string;
+  fileName?: string;
+  releases?: string[];
+  origin?: string | null;
+  isHearingImpaired?: boolean;
+};
+
+type CleanSubtitle = {
+  url: string;
+  lang: "es" | "en";
+  score: number;
+};
+
+// =========================
 // 🧠 fetch seguro
 // =========================
-async function safeFetch(url: string) {
+async function safeFetch(url: string): Promise<WyzieSubtitle[]> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT);
 
@@ -25,7 +45,10 @@ async function safeFetch(url: string) {
 
     if (!res.ok) return [];
 
-    return await res.json();
+    const data = await res.json();
+
+    // 🔥 asegúrate que siempre sea array
+    return Array.isArray(data) ? data : [];
   } catch {
     return [];
   }
@@ -34,13 +57,15 @@ async function safeFetch(url: string) {
 // =========================
 // 🧠 scoring
 // =========================
-function getScore(s: any) {
+function getScore(s: WyzieSubtitle): number {
   let score = 0;
 
   if (s.downloadCount) score += Math.min(s.downloadCount / 1000, 5);
 
-  if (s.release?.toLowerCase().includes("1080")) score += 3;
-  if (s.release?.toLowerCase().includes("720")) score += 2;
+  const release = s.release?.toLowerCase() || "";
+
+  if (release.includes("1080")) score += 3;
+  if (release.includes("720")) score += 2;
 
   if (s.origin === "WEB") score += 2;
   if (s.origin === "BLURAY") score += 3;
@@ -53,7 +78,7 @@ function getScore(s: any) {
 // =========================
 // 🔥 NORMALIZE
 // =========================
-function normalize(str: string) {
+function normalize(str: string): string {
   return str
     .toLowerCase()
     .replace(/[^a-z0-9]/g, " ")
@@ -64,8 +89,12 @@ function normalize(str: string) {
 // =========================
 // 🔥 FILTRO REAL
 // =========================
-function isRelevantSubtitle(s: any, title: string, year?: string) {
-  if (!title) return true; // fallback si no mandas título
+function isRelevantSubtitle(
+  s: WyzieSubtitle,
+  title: string,
+  year?: string
+): boolean {
+  if (!title) return true;
 
   const target = normalize(title);
 
@@ -74,17 +103,14 @@ function isRelevantSubtitle(s: any, title: string, year?: string) {
     s.fileName,
     ...(s.releases || []),
   ]
-    .filter(Boolean)
+    .filter((v): v is string => typeof v === "string" && v.length > 0)
     .map(normalize);
 
   return sources.some((text) => {
-    // 🔥 filtro por año
     if (year && !text.includes(year)) return false;
 
-    // match fuerte
     if (text.includes(target)) return true;
 
-    // match parcial
     const words = target.split(" ");
     const matches = words.filter((w) => text.includes(w));
 
@@ -106,7 +132,7 @@ export async function GET(req: NextRequest) {
 
   const params = new URLSearchParams({
     id: tmdbId,
-    key: process.env.WYZIE_API_KEY!,
+    key: process.env.WYZIE_API_KEY ?? "",
     format: "srt,vtt",
     language: "es,en",
   });
@@ -115,29 +141,32 @@ export async function GET(req: NextRequest) {
     `https://sub.wyzie.io/search?${params.toString()}`
   );
 
-  console.log("RAW SUBS:", data);
-
   // =========================
-  // 🔥 FILTRO AQUI
+  // 🔥 FILTRO
   // =========================
-  const filtered = (data || []).filter((s: any) =>
+  const filtered = data.filter((s) =>
     isRelevantSubtitle(s, title, year)
   );
 
   // =========================
-  // 🧠 MAP
+  // 🧠 MAP SAFE
   // =========================
-  const subtitles = filtered.map((s: any) => ({
-    url: s.url,
-    lang: s.language === "es" ? "es" : "en",
-    score: getScore(s),
-  }));
+  const subtitles: CleanSubtitle[] = filtered
+    .filter((s): s is Required<Pick<WyzieSubtitle, "url" | "language">> =>
+      Boolean(s.url && s.language)
+    )
+    .map((s) => ({
+      url: s.url,
+      lang: s.language === "es" ? "es" : "en",
+      score: getScore(s),
+    }));
 
   // =========================
   // 🔁 dedupe
   // =========================
-  const seen = new Set();
-  const unique = subtitles.filter((s: any) => {
+  const seen = new Set<string>();
+
+  const unique = subtitles.filter((s) => {
     if (seen.has(s.url)) return false;
     seen.add(s.url);
     return true;
@@ -157,7 +186,7 @@ export async function GET(req: NextRequest) {
   // =========================
   // 🔥 proxy
   // =========================
-  const proxied = unique.map((s: any) => ({
+  const proxied = unique.map((s) => ({
     url: `/api/subtitle?url=${encodeURIComponent(s.url)}`,
     lang: s.lang,
   }));
