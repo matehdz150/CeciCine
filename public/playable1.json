@@ -1,0 +1,1522 @@
+[
+  {
+    "name": "CCTV 16",
+    "url": "http://69.30.246.194/live/cctv16.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "CCTV 5plus",
+    "url": "http://69.30.246.194/live/cctv5p.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "INDOSIAR_HD_id",
+    "url": "http://cdn.nng.cloudns.us/live/m3u8/id/575eeb9f08dc8db.m3u8",
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Linux; Android 14; Google TV Streamer Build/UTT3.240625.001.K5; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/130.0.6723.60 Mobile Safari/537.36"
+    },
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {
+      "user-agent": "Mozilla/5.0 (Linux; Android 14; Google TV Streamer Build/UTT3.240625.001.K5; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/130.0.6723.60 Mobile Safari/537.36"
+    },
+    "requiresHeaders": false
+  },
+  {
+    "name": "INDOSIAR BRI LIGA 1",
+    "url": "https://warningfm.github.io/v3/live/str/id/575eeb9f08dc8db.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "RTB_ANEKA",
+    "url": "https://d1211whpimeups.cloudfront.net/smil:rtb2/chunklist_b608000_sleng.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "RTB_SUKMA.INDERA",
+    "url": "https://d1211whpimeups.cloudfront.net/smil:rtb1/chunklist_b608000_sleng.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "UK: TNT Sports 2 HD",
+    "url": "http://vipkentken.top:8080/VIP01697172669118799/80fba95604f6/147029",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Dazn Ringside",
+    "url": "https://aegis-cloudfront-1.tubi.video/bfad29e2-5bee-44f3-8256-127324e8b106/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Hub Premier  EPL 09",
+    "url": "http://lunar.pm:8080/Mrdon/4782314540/110296",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Hub Premier  EPL 01",
+    "url": "http://lunar.pm:8080/Mrdon/4782314540/110288",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Spotv 2 (tvod)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000138/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Soccer Channel (tvod)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000132/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportstar 1 (tvod)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000134/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportstar 2 (tvod)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000124/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Fight sports (tvod)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000163/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportstar 2 (tvod) (B)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000135/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportstar 4 (tvod)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000045/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Spotv (tvod)",
+    "url": "http://202.80.222.20/cdn/iptv/Tvod/001/channel2000160/1024.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sony Sports 2",
+    "url": "http://103.175.242.10:8080/sonyten2/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sony Sports 5",
+    "url": "http://103.175.242.10:8080/sonyten5/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "T Sports HD",
+    "url": "http://103.175.242.10:8080/tsports1/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sony Sports 1",
+    "url": "http://103.175.242.10:8080/sonyten1/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "StrongmanChampionLeague",
+    "url": "https://3f4b9dde8740443b9b90459fc7b67cdd.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/Samsung-gb_StrongmanChampionsLeague/e21d95be-bbb1-442c-bd84-71813dc764ce/0.m3u8",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "J Sport 1 (JPN)",
+    "url": "https://nl.utako.moe/js1/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Gaora Sports (JPN)",
+    "url": "https://nl.utako.moe/gaora/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sport Live Plus (JPN)",
+    "url": "https://nl.utako.moe/sport_live_plus/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "J Sport 4 (JPN)",
+    "url": "https://nl.utako.moe/js4/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "J Sport 2 (JPN)",
+    "url": "https://nl.utako.moe/js2/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "J Sport 3 (JPN)",
+    "url": "https://nl.utako.moe/js3/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Fighting TV Samurai (JPN)",
+    "url": "https://nl.utako.moe/fighting_tv/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Strongman Champion League 1",
+    "url": "https://rightsboosterltd-scl-1-nl.samsung.wurl.tv/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SPOTV (ID)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1165867.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SOCCER CHANEL (ID)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1165923.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "INEWS (ID)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1165906.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Arena Bola (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163987.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Astro CRICKET (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163988.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "RCTI  (ID)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1165918.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MNCTV (ID)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1165910.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Astro PremierLeague 1 (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163985.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Astro Arena (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163983.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "UK: SkySports Golf FHD",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/35240",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SPOTV 2 (ID)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1165868.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BEINSPORTS 4 (ID)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1165889.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US Golf Channel",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/9806",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US: Marquee Sports Network (HD)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/13379",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US: ESPN 1 (HD)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/9802",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "USA: NBC",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/46687",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US: CBS Sports Network HD",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/10454",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US Fox Sports 2 (A)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/1847",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "UK: SkySports F1 FHD",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/53704",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US MAV TV (F)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/20977",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US: ESPN 2",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/2210",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US: ESPNU College Sports",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/10255",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "USA: NBA TV",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/20073",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US Fox Sports 1",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/1846",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Astro PremierLeague 2 (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163986.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Iraq Sport",
+    "url": "https://cdn.catiacast.video/abr/78054972db7708422595bc96c6e024ac/imn/news1/chunks.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "TVRI Sport_(ott)",
+    "url": "https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD.m3u8",
+    "headers": {
+      "user-agent": "TVRIKLIK/7.0 (Linux;Android 15.0.0;) ExoPlayerLib/2.19.1"
+    },
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {
+      "user-agent": "TVRIKLIK/7.0 (Linux;Android 15.0.0;) ExoPlayerLib/2.19.1"
+    },
+    "requiresHeaders": false
+  },
+  {
+    "name": "Oman Sport",
+    "url": "https://partneta.cdn.mgmlcdn.com/omsport/smil:omsport.stream.smil/chunklist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "WWE",
+    "url": "http://Supersonictv.live:8080/live/006779/439866/22185.ts",
+    "headers": {},
+    "status": 200,
+    "contentType": "video/mp2t",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Kuwait Sports",
+    "url": "https://kwtspta.cdn.mangomolo.com/sp/smil:sp.stream.smil/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BR: •COMBATE",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4838",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BR: •ESPN 2",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4855",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BR: •ESPN4",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4859",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BR: •PREMIERE CLUBES",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4892",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "UFC",
+    "url": "https://dbrb49pjoymg4.cloudfront.net/10001/99951134/hls/playlist.m3u8?ads.xumo_channelId=99951134",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: ESPN 2",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4758",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BR: •SPORTV 3",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4904",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BR: •SPORTV 1",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4902",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MX ▎PLUTO TV LUCHA LIBRE AAA(pluto)",
+    "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5c01df1759ee03633e7b272c/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&app_name=&architecture=&buildVersion=&deviceDNT=0&deviceId=5c01df1759ee03633e7b272c&deviceLat=&deviceLon=&deviceMake=web&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&marketingRegion=US&serverSideAds=false&sid=971&terminate=false&userId=",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/x-mpegurl; charset=utf-8",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: DIRECTV SPORTS",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4748",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: ESPN",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4757",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: FOX SPORTS 1",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4764",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: FOX SPORTS 2",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4765",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: ESPN 3",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4759",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: FOX SPORTS PREMIUM",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4767",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: TYC SPORTS",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4822",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: TNT SPORTS",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4815",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: GOLF CHANNEL",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4771",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Swerve Combat",
+    "url": "https://dbrb49pjoymg4.cloudfront.net/10001/99991696/hls/playlist.m3u8?ads.xumo_channelId=99991696",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MX ▎PLUTO TV LUCHA LIBRE AAA(roku)",
+    "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5c01df1759ee03633e7b272c/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/x-mpegurl; charset=utf-8",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Bahrain Sports 1",
+    "url": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Bahrain Sports 2",
+    "url": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "UFC Network",
+    "url": "http://supersonictv.live:8080/006779/439866/22177",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "WWE Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22185",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "FS 1",
+    "url": "http://supersonictv.live:8080/006779/439866/40398",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Stadium UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40428",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Bein Sports N Espanol UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22195",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "World Fishing Network",
+    "url": "http://supersonictv.live:8080/006779/439866/22183",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ESPNU UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22202",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ESPN UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22198",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MLB Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40402",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ESPN Deportes UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22222",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ESPN 2 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22199",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ESPN SEC Network",
+    "url": "http://supersonictv.live:8080/006779/439866/22208",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "CBS Sport Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40395",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Golf UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40401",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "NFL Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40412",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "NHL Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40413",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MSG",
+    "url": "http://supersonictv.live:8080/006779/439866/40404",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "The Golf Channel",
+    "url": "http://supersonictv.live:8080/006779/439866/40434",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "YES Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40438",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Willow Cricket Extra",
+    "url": "http://supersonictv.live:8080/006779/439866/40437",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsman",
+    "url": "http://supersonictv.live:8080/006779/439866/47754",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Tennis Channel UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40433",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SkySports Main Event",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/35243",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SkySports F1 FHD (D)",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/53704",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Fubo Sports Network",
+    "url": "http://supersonictv.live:8080/006779/439866/47752",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "NFL NETWORK HD",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/47346",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsnet 360 HD",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/2219",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsnet East HD (F)",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/57298",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BT Sports 2 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40442",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Eurosport 1 FHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40451",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BT Sports 3 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40443",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BT Sports 1 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40441",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "TSN 2 HD",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/47442",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsnet West (FHD)",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/20975",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsnet One (HD)",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/47379",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsnet World HD",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/75675",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsnet Pacific HD",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/47387",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "CA TSN 4",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/66783",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "TSN 1 (R)",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/47440",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "TSN 3 HD",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/10389",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Sportsnet Ontario",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/57463",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "CA TSN 5 HD",
+    "url": "http://fortv.cc:8080/longcalvin42@yahoo.com/C3129344075L/16131",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "AYM.SPORTS",
+    "url": "https://aym-as.otteravision.com/aym/as/as.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Tennis Channel",
+    "url": "https://tennischannel-int-samsunguk.amagi.tv/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Tennis Channel",
+    "url": "https://tennischannel-int-samsunguk.amagi.tv/playlist720_p.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "CANAL.ONCE",
+    "url": "https://vivo.canaloncelive.tv/alivepkgr3/ngrp:cepro_all/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "EQUALYMPIC HD",
+    "url": "http://cdnua03.hls.tv/476/hls/c4a7acbb4f6a85595a117f7aa2099d65/4779/stream.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Horse & Country",
+    "url": "https://hnc-free-viewlift.amagi.tv/HNC_AUSTRALIA.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Старт",
+    "url": "http://stream-msk-13.ott.tricolor.tv/dtv/id625_MSKSG-PVR-1--Start/04/plst.m3u8?drmreq=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfdHlwZSI6ImFwdHBfb3R0IiwiY2xhc3MiOiJCUk9XU0VSIiwiZHJlaWQiOiIzOTA0MDkwNjczMjQzMSIsImV4cCI6MTc3MDYwNTkzNiwiaHdpZCI6IjkyY2RiNTJmZGE4M2NkM2QxMWUzNjIyNjUzZWRmYTYxYmMzMTllOGZiMTQ5YWQyZmQxYzljZjk1YjkzOWEzOTciLCJsYXN0X3JlcV9kYXRlIjoxNzcwMDAxMTM2LCJzZXNzaW9uX2lkIjoiZWVhZDQ2ZGVkYTMwOGIxODUwZTE5MjBlZTA2NjAwZjgiLCJ0b2tlbl90eXBlIjoiQ29udGVudEFjY2Vzc1Rva2VuIiwidHlwZSI6Ik1PWklMTEEifQ.MVfnFvHQjWSagZa4vKbFi8YYOspIy4LbXvOHGWpHgOM",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "INTERNETV.DEPORTES",
+    "url": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=5999",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Русский экстрим",
+    "url": "http://stream-msk-06.ott.tricolor.tv/dtv/id294_MSKSG-PVR-1--HD_Russkiy_Extreme/03/plst.m3u8?drmreq=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBfdHlwZSI6ImFwdHBfb3R0IiwiY2xhc3MiOiJCUk9XU0VSIiwiZHJlaWQiOiIzOTA0MDkwNjczMjQzMSIsImV4cCI6MTc3MDYwNTkzNiwiaHdpZCI6IjkyY2RiNTJmZGE4M2NkM2QxMWUzNjIyNjUzZWRmYTYxYmMzMTllOGZiMTQ5YWQyZmQxYzljZjk1YjkzOWEzOTciLCJsYXN0X3JlcV9kYXRlIjoxNzcwMDAxMTM2LCJzZXNzaW9uX2lkIjoiZWVhZDQ2ZGVkYTMwOGIxODUwZTE5MjBlZTA2NjAwZjgiLCJ0b2tlbl90eXBlIjoiQ29udGVudEFjY2Vzc1Rva2VuIiwidHlwZSI6Ik1PWklMTEEifQ.MVfnFvHQjWSagZa4vKbFi8YYOspIy4LbXvOHGWpHgOM",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "XSport",
+    "url": "http://iptv.prosto.tv:7000/ch110/video.m3u8",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Billyard Tv",
+    "url": "https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/billiard-tv/6063a9ba-71aa-44f2-bdcf-0eb1cabf7b34/2.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Turkmen Sport",
+    "url": "http://217.174.225.146/hls/ch004_720/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Turkmen Sport HD",
+    "url": "http://alpha.tv.online.tm/legacyhls/ch004_720/index.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Астрахань.Ru Sport (720p)",
+    "url": "https://streaming.astrakhan.ru/astrakhanrusporthd/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Окко Спорт",
+    "url": "http://ua.online24.pm/play/7337/350B326FB34F4B8/video.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Esportes Brasília HD",
+    "url": "https://a.cdni.live/radioesporte/radioesporte/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "UK: MUTV",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/53717",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "US: WWE NETWORK",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/11645",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BR: •FOX SPORTS 2",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4860",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: FOX SPORTS 3",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4766",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ARG: ESPN+",
+    "url": "http://vipketseyket.top:8080/VIP017921761312332102/f455784d27ea/4760",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "TDM Sports (720p)",
+    "url": "https://live3.tdm.com.mo/ch4/sport_ch4.live/playlist.m3u8",
+    "headers": {},
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MAVTV",
+    "url": "http://supersonictv.live:8080/006779/439866/22117",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Fight Network",
+    "url": "http://supersonictv.live:8080/006779/439866/40397",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Stadium 1 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40429",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "BeIN Sports LaLiga",
+    "url": "http://supersonictv.live:8080/006779/439866/22196",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "FS 2",
+    "url": "http://supersonictv.live:8080/006779/439866/40399",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "ACC Network",
+    "url": "http://supersonictv.live:8080/006779/439866/40389",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "NBA TV UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40409",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Marquee Sports Network",
+    "url": "http://supersonictv.live:8080/006779/439866/40408",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MSG2",
+    "url": "http://supersonictv.live:8080/006779/439866/40406",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "NESN",
+    "url": "http://supersonictv.live:8080/006779/439866/40410",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "MSGPlus",
+    "url": "http://supersonictv.live:8080/006779/439866/40405",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "NESN Plus",
+    "url": "http://supersonictv.live:8080/006779/439866/40411",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SKYSPORTS MAIN EVENT HD",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/137720",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "TyC Sports",
+    "url": "http://supersonictv.live:8080/006779/439866/40435",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Willow Cricket",
+    "url": "http://supersonictv.live:8080/006779/439866/40436",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SkySports Golf FHD",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/35240",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SkySports PremierLeague",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/35241",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "SkySports F1 FHD",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/35244",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "FoxSports Racing",
+    "url": "http://supersonictv.live:8080/006779/439866/40462",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "PremierSport 2",
+    "url": "http://supersonictv.live:8080/006779/439866/40450",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  },
+  {
+    "name": "Eurosport 2 FHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40452",
+    "headers": {},
+    "status": 200,
+    "contentType": "application/octet-stream",
+    "workingHeaders": {},
+    "requiresHeaders": false
+  }
+]

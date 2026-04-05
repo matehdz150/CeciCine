@@ -10,6 +10,9 @@ async function getBrowser() {
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--no-zygote",
+        "--single-process",
         "--disable-blink-features=AutomationControlled",
       ],
     });
@@ -32,6 +35,9 @@ export async function extractVideoData(pageUrl, signal) {
     let resolveStream;
     const streamFound = new Promise((res) => (resolveStream = res));
 
+    const HARD_TIMEOUT = 20000;
+    const startTime = Date.now();
+
     // 🧠 stealth
     await page.evaluateOnNewDocument(() => {
       Object.defineProperty(navigator, "webdriver", {
@@ -43,28 +49,36 @@ export async function extractVideoData(pageUrl, signal) {
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
     );
 
+    // 🔥 interception más seguro
     await page.setRequestInterception(true);
 
     page.on("request", (req) => {
       const url = req.url();
       const type = req.resourceType();
 
-      // ❌ NO bloquees media
-      if (["image", "font"].includes(type)) {
+      // ⚠️ SOLO bloquea imágenes
+      if (type === "image") {
         return req.abort();
       }
 
-      // bloquear basura
       if (
-        url.includes("vsembed.ru") ||
         url.includes("doubleclick") ||
-        url.includes("analytics")
+        url.includes("analytics") ||
+        url.includes("ads")
       ) {
         return req.abort();
       }
 
-      // 🎯 stream
-      if (!result.stream && (url.includes(".m3u8") || url.includes(".mp4"))) {
+      // 🎯 stream detection mejorado
+      if (
+        !result.stream &&
+        (
+          url.includes(".m3u8") ||
+          url.includes(".mp4") ||
+          url.includes("playlist") ||
+          url.includes("index.m3u8")
+        )
+      ) {
         console.log("🔥 STREAM:", url);
         result.stream = url;
         resolveStream();
@@ -82,41 +96,43 @@ export async function extractVideoData(pageUrl, signal) {
 
     try {
       await page.goto(pageUrl, {
-        waitUntil: "domcontentloaded",
-        timeout: 15000,
+        waitUntil: "networkidle2",
+        timeout: 20000,
       });
 
-      // 🚀 interacción fuerte
+      // 🎬 interacción fuerte
       await page.evaluate(() => {
-        const clickAll = () => {
-          document.querySelectorAll("button, div").forEach((el) => {
-            const txt = (el.textContent || "").toLowerCase();
-            const cls = (el.className || "").toLowerCase();
-
-            if (txt.includes("play") || cls.includes("play")) {
-              el.click();
-            }
-          });
-
+        const tryPlay = () => {
           const video = document.querySelector("video");
           if (video) {
             video.muted = true;
             video.play().catch(() => {});
           }
+
+          document.querySelectorAll("button").forEach((btn) => {
+            if ((btn.textContent || "").toLowerCase().includes("play")) {
+              btn.click();
+            }
+          });
         };
 
-        clickAll();
-        setTimeout(clickAll, 1000);
-        setTimeout(clickAll, 2000);
+        tryPlay();
+        setTimeout(tryPlay, 1000);
+        setTimeout(tryPlay, 2000);
       });
 
-      // 🔥 explorar iframes
+      // 🔥 evitar loops infinitos
+      const explored = new Set();
+
       const exploreFrames = async () => {
         const frames = page.frames();
 
         for (const frame of frames) {
           try {
             const url = frame.url();
+
+            if (!url || explored.has(url)) continue;
+            explored.add(url);
 
             if (
               url.includes("embed") ||
@@ -126,25 +142,39 @@ export async function extractVideoData(pageUrl, signal) {
               console.log("🧠 iframe:", url);
 
               await frame.evaluate(() => {
-                document.body.click();
                 const video = document.querySelector("video");
-                if (video) video.play();
+                if (video) {
+                  video.muted = true;
+                  video.play().catch(() => {});
+                }
+                document.body.click();
               });
             }
           } catch {}
         }
       };
 
-      const start = Date.now();
-
-      while (!result.stream && Date.now() - start < 10000) {
+      // 🔁 loop controlado
+      while (
+        !result.stream &&
+        Date.now() - startTime < HARD_TIMEOUT
+      ) {
         await exploreFrames();
-        await new Promise((r) => setTimeout(r, 500));
+        await new Promise((r) => setTimeout(r, 700));
+      }
+
+      // 🔁 retry si no encontró nada
+      if (!result.stream) {
+        console.log("🔁 retrying...");
+
+        await page.reload({ waitUntil: "networkidle2" });
+
+        await new Promise((r) => setTimeout(r, 3000));
       }
 
       await Promise.race([
         streamFound,
-        new Promise((r) => setTimeout(r, 10000)),
+        new Promise((r) => setTimeout(r, HARD_TIMEOUT)),
       ]);
     } catch {
       console.log("⚠️ navegación incompleta");
@@ -158,7 +188,7 @@ export async function extractVideoData(pageUrl, signal) {
     console.log("💀 error:", e.message);
     return { stream: null, subtitles: [] };
   } finally {
-    if (page) {
+    if (page && !page.isClosed()) {
       try {
         await page.close();
       } catch {}

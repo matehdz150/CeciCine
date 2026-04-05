@@ -57,7 +57,7 @@ export default function Player({
   const [duration, setDuration] = useState(0);
 
   const [selectedSubtitleUrl, setSelectedSubtitleUrl] = useState<string | null>(
-    null
+    null,
   );
   const [subtitleMenuOpen, setSubtitleMenuOpen] = useState(false);
 
@@ -101,7 +101,7 @@ export default function Player({
 
     video.addEventListener("timeupdate", update);
     video.addEventListener("loadedmetadata", () =>
-      setDuration(video.duration || 0)
+      setDuration(video.duration || 0),
     );
 
     return () => video.removeEventListener("timeupdate", update);
@@ -180,14 +180,27 @@ export default function Player({
 
     const track = trackRef.current;
 
-    if (!selectedSubtitleUrl) {
-      track.removeAttribute("src");
-      track.track.mode = "disabled";
-      return;
+    // 🔥 reset duro
+    track.track.mode = "disabled";
+    track.removeAttribute("src");
+    track.load?.();
+
+    if (!selectedSubtitleUrl) return;
+
+    let finalUrl = selectedSubtitleUrl;
+
+    // 🔥 evitar doble proxy
+    if (!selectedSubtitleUrl.startsWith("/api/subtitle")) {
+      finalUrl = `/api/subtitle?url=${encodeURIComponent(selectedSubtitleUrl)}`;
     }
 
-    track.src = selectedSubtitleUrl;
-    track.track.mode = "showing";
+    // 🔥 set nuevo src
+    track.src = finalUrl;
+
+    // 🔥 pequeño delay para que el browser procese
+    setTimeout(() => {
+      track.track.mode = "showing";
+    }, 50);
   }, [selectedSubtitleUrl]);
 
   // =========================
@@ -207,7 +220,16 @@ export default function Player({
         playsInline
         className="w-full h-full object-contain"
       >
-        <track ref={trackRef} kind="subtitles" />
+        {selectedSubtitleUrl && (
+          <track
+            key={selectedSubtitleUrl} // 🔥 fuerza re-render REAL
+            src={selectedSubtitleUrl}
+            kind="subtitles"
+            srcLang="es"
+            label="Español"
+            default
+          />
+        )}
       </video>
 
       {/* 🔊 UNMUTE BUTTON */}
@@ -260,11 +282,7 @@ export default function Player({
 
             {/* FULLSCREEN */}
             <button onClick={toggleFullscreen}>
-              {isFullscreen ? (
-                <Minimize size={22} />
-              ) : (
-                <Maximize size={22} />
-              )}
+              {isFullscreen ? <Minimize size={22} /> : <Maximize size={22} />}
             </button>
 
             {/* SUBS */}

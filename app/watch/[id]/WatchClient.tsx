@@ -8,12 +8,11 @@ import { ArrowLeft, Calendar, Flame, Globe, Star } from "lucide-react";
 export default function WatchClient({ id }: { id: string }) {
   const router = useRouter();
 
-
   const [movie, setMovie] = useState<any>(null);
   const [stream, setStream] = useState<string | null>(null);
-  const [subtitles, setSubtitles] = useState<
-    { url: string; lang: string }[]
-  >([]);
+  const [subtitles, setSubtitles] = useState<{ url: string; lang: string }[]>(
+    [],
+  );
   const [loadingStream, setLoadingStream] = useState(false);
 
   useEffect(() => {
@@ -25,11 +24,27 @@ export default function WatchClient({ id }: { id: string }) {
   const handlePlay = async () => {
     setLoadingStream(true);
 
-    const res = await fetch(`/api/play?tmdbId=${id}`);
-    const data = await res.json();
+    try {
+      const [playRes, subsRes] = await Promise.all([
+        fetch(`/api/play?tmdbId=${id}`),
+        fetch(
+          `/api/subtitles?tmdbId=${id}&title=${encodeURIComponent(
+            movie.title,
+          )}&year=${movie.release_date?.slice(0, 4)}`,
+        ),
+      ]);
 
-    setStream(data.stream);
-    setSubtitles(data.subtitles || []);
+      const playData = await playRes.json();
+      const subsData = await subsRes.json();
+
+      console.log("SUBS FILTRADOS:", subsData);
+
+      setStream(playData.stream);
+      setSubtitles(subsData.subtitles || []);
+    } catch (e) {
+      console.error("play error", e);
+    }
+
     setLoadingStream(false);
   };
 
@@ -79,9 +94,7 @@ export default function WatchClient({ id }: { id: string }) {
             Back
           </button>
 
-          <div className="text-xs sm:text-sm text-gray-300">
-            Search Movie
-          </div>
+          <div className="text-xs sm:text-sm text-gray-300">Search Movie</div>
         </div>
 
         {/* PLAY */}
@@ -118,9 +131,7 @@ export default function WatchClient({ id }: { id: string }) {
 
         {/* DETAILS */}
         <div className="md:col-span-2">
-          <h2 className="text-lg sm:text-xl font-semibold mb-4">
-            Details
-          </h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Details</h2>
 
           <div className="text-xs sm:text-sm text-gray-300 space-y-3">
             <div className="flex items-center gap-2">
@@ -135,9 +146,7 @@ export default function WatchClient({ id }: { id: string }) {
 
             <div className="flex items-center gap-2">
               <Globe size={16} className="text-green-400" />
-              <span className="uppercase">
-                {movie.original_language}
-              </span>
+              <span className="uppercase">{movie.original_language}</span>
             </div>
 
             <div className="flex items-center gap-2">

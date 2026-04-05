@@ -1,55 +1,184 @@
-// app/api/subtitle/route.ts
-
 import { NextRequest } from "next/server";
 import iconv from "iconv-lite";
 
-function srtToVtt(srt: string, delay = 0) {
+const TIMEOUT = 8000;
+
+// =========================
+// 🔤 SRT → VTT
+// =========================
+function srtToVtt(srt: string) {
   return (
     "WEBVTT\n\n" +
     srt
       .replace(/\r+/g, "")
-      .replace(/(\d{2}):(\d{2}):(\d{2}),(\d{3})/g, (_, h, m, s, ms) => {
-        const total =
-          Number(h) * 3600 +
-          Number(m) * 60 +
-          Number(s) +
-          Number(ms) / 1000 +
-          delay;
-
-        const newH = String(Math.floor(total / 3600)).padStart(2, "0");
-        const newM = String(Math.floor((total % 3600) / 60)).padStart(2, "0");
-        const newS = String(Math.floor(total % 60)).padStart(2, "0");
-        const newMs = String(Math.floor((total % 1) * 1000)).padStart(3, "0");
-
-        return `${newH}:${newM}:${newS}.${newMs}`;
-      })
+      .replace(
+        /(\d{2}):(\d{2}):(\d{2}),(\d{3})/g,
+        (_, h, m, s, ms) => `${h}:${m}:${s}.${ms}`,
+      )
   );
 }
 
-export async function GET(req: NextRequest) {
-  const url = req.nextUrl.searchParams.get("url");
+// =========================
+// 🔍 detectar encoding roto
+// =========================
+function isBrokenEncoding(text: string) {
+  return /Ã|�/.test(text);
+}
 
-  if (!url) return new Response("missing url", { status: 400 });
+// =========================
+// 🧠 decode
+// =========================
+function decodeBuffer(buffer: ArrayBuffer) {
+  const uint8 = new Uint8Array(buffer);
 
-  const res = await fetch(url);
-  const buffer = await res.arrayBuffer();
+  let text = new TextDecoder("utf-8", { fatal: false }).decode(uint8);
+  if (!isBrokenEncoding(text) && text.length > 50) return text;
 
-  let text: string;
+  const encodings = ["windows-1252", "latin1", "iso-8859-1", "ascii"];
 
-  // 🔥 intenta UTF-8 primero
-  text = new TextDecoder("utf-8").decode(buffer);
+  for (const enc of encodings) {
+    try {
+      const decoded = iconv.decode(Buffer.from(uint8), enc);
 
-  // 🔥 si detectas basura → fallback CP1252
-  if (text.includes("Ã") || text.includes("�")) {
-    text = iconv.decode(Buffer.from(buffer), "win1252");
+      if (!isBrokenEncoding(decoded) && decoded.length > 50) {
+        return decoded;
+      }
+    } catch {}
   }
 
-  const vtt = text.startsWith("WEBVTT") ? text : srtToVtt(text);
+  return text;
+}
 
-  return new Response(vtt, {
-    headers: {
-      "Content-Type": "text/vtt",
-      "Access-Control-Allow-Origin": "*",
-    },
+// =========================
+// 🔓 decode URL
+// =========================
+function safeDecode(url: string) {
+  try {
+    return decodeURIComponent(url);
+  } catch {
+    return url;
+  }
+}
+
+// =========================
+// 🧠 validar contenido
+// =========================
+function isValidSubtitle(text: string) {
+  return text.includes("-->") || text.includes("WEBVTT");
+}
+
+// =========================
+// 🔥 FILTRO INTELIGENTE
+// =========================
+function normalize(str: string) {
+  return str
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isRelevantSubtitle(s: any, title: string, year?: string) {
+  const target = normalize(title);
+
+  const sources = [
+    s.release,
+    s.fileName,
+    ...(s.releases || []),
+  ]
+    .filter(Boolean)
+    .map(normalize);
+
+  return sources.some((text) => {
+    // 🔥 filtro por año (si lo tienes)
+    if (year && !text.includes(year)) return false;
+
+    // match fuerte
+    if (text.includes(target)) return true;
+
+    // match parcial
+    const words = target.split(" ");
+    const matches = words.filter((w) => text.includes(w));
+
+    return matches.length >= Math.ceil(words.length * 0.6);
   });
+}
+
+// =========================
+// 🚀 MAIN
+// =========================
+export async function GET(req: NextRequest) {
+  const rawUrl = req.nextUrl.searchParams.get("url");
+  const title = req.nextUrl.searchParams.get("title") || "";
+  const year = req.nextUrl.searchParams.get("year") || "";
+
+  if (!rawUrl) {
+    return new Response("missing url", { status: 400 });
+  }
+
+  if (rawUrl.includes("/api/subtitle")) {
+    return new Response("recursive blocked", { status: 400 });
+  }
+
+  let url: string;
+
+  try {
+    url = safeDecode(rawUrl);
+    new URL(url);
+  } catch {
+    return new Response("invalid url", { status: 400 });
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), TIMEOUT);
+
+  try {
+    const res = await fetch(url, {
+      signal: controller.signal,
+      redirect: "follow",
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120 Safari/537.36",
+        Accept: "*/*",
+        Referer: "https://sub.wyzie.io/",
+      },
+    });
+
+    clearTimeout(timeout);
+
+    if (!res.ok) {
+      throw new Error("bad response");
+    }
+
+    const buffer = await res.arrayBuffer();
+    let text = decodeBuffer(buffer);
+
+    if (!isValidSubtitle(text)) {
+      text = new TextDecoder().decode(buffer);
+    }
+
+    const vtt = text.startsWith("WEBVTT") ? text : srtToVtt(text);
+
+    return new Response(vtt, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/vtt",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=3600",
+      },
+    });
+  } catch (e: any) {
+    console.error("❌ subtitle proxy error:", e);
+
+    return new Response(
+      "WEBVTT\n\n00:00:00.000 --> 00:00:02.000\nSubtitle unavailable",
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "text/vtt",
+          "Access-Control-Allow-Origin": "*",
+        },
+      },
+    );
+  }
 }

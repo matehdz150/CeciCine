@@ -1,0 +1,1532 @@
+[
+  {
+    "name": "CCTV 5plus",
+    "url": "http://69.30.246.194/live/cctv5p.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "CCTV 16",
+    "url": "http://69.30.246.194/live/cctv16.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "CCTV5 hd",
+    "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv5hd.m3u8?auth=testpub",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "CCTV +",
+    "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv5p.m3u8?auth=testpub",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "CCTV 16 hd",
+    "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv16hd.m3u8?auth=testpub",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "CCTV FOOTBALL",
+    "url": "http://38.75.136.137:98/gslb/dsdqpub/fyzq.m3u8?auth=testpub",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "J Sport 4 (JPN)",
+    "url": "https://nl.utako.moe/js4/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "J Sport 1 (JPN)",
+    "url": "https://nl.utako.moe/js1/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Sport Live Plus (JPN)",
+    "url": "https://nl.utako.moe/sport_live_plus/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "J Sport 2 (JPN)",
+    "url": "https://nl.utako.moe/js2/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Gaora Sports (JPN)",
+    "url": "https://nl.utako.moe/gaora/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Fighting TV Samurai (JPN)",
+    "url": "https://nl.utako.moe/fighting_tv/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "J Sport 3 (JPN)",
+    "url": "https://nl.utako.moe/js3/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "UK: TNT Sports 1 HD",
+    "url": "http://vipkentken.top:8080/VIP01697172669118799/80fba95604f6/147028",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "UK: TNT Sports 3 HD",
+    "url": "http://vipkentken.top:8080/VIP01697172669118799/80fba95604f6/147030",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "UK: TNT Sports 2 HD",
+    "url": "http://vipkentken.top:8080/VIP01697172669118799/80fba95604f6/147029",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "UK: TNT Sports 4 HD",
+    "url": "http://vipkentken.top:8080/VIP01697172669118799/80fba95604f6/147031",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Hub Premier  EPL 01",
+    "url": "http://lunar.pm:8080/Mrdon/4782314540/110288",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Hub Premier  EPL 05",
+    "url": "http://lunar.pm:8080/Mrdon/4782314540/110292",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Hub Premier  EPL 03",
+    "url": "http://lunar.pm:8080/Mrdon/4782314540/110290",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "INDOSIAR_HD_id",
+    "url": "http://cdn.nng.cloudns.us/live/m3u8/id/575eeb9f08dc8db.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Dazn Ringside",
+    "url": "https://aegis-cloudfront-1.tubi.video/bfad29e2-5bee-44f3-8256-127324e8b106/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "HBO Boxing (TubiTv)",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKooNXMhoQyYN9TEoY9wfF1Q8",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RTB_SUKMA.INDERA",
+    "url": "https://d1211whpimeups.cloudfront.net/smil:rtb1/chunklist_b608000_sleng.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "RTB_ANEKA",
+    "url": "https://d1211whpimeups.cloudfront.net/smil:rtb2/chunklist_b608000_sleng.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Fan Duel Sports SoCal",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKorNpZXE-wDybC7Um7-AqAfY",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "CBS Sports News",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKolA6XvvoZI4SPKXdRr3qbmQ",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Outside TV",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKoi9amQhzf0yxp68aCUy971c",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NHL NETWORK",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKon_PB_1BckmKfCZO-8whUZA",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "CBS Sports Network",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKonDKQVdtlzT8kdwKuI5BOWU",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SUPERSPORT 1",
+    "url": "http://93.93.113.95:25461/TV-Berati/XtreamCodes/494",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SUPERSPORT 2",
+    "url": "http://93.93.113.95:25461/TV-Berati/XtreamCodes/495",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN | HD",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKohPeWIEe1cDj4sG9jVCQMTc",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN 3 | HD",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKouvdqdey0Tqrm-emMor272E",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN 2 | HD",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKos9mbqdJkST1_evT_CUbCDo",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SUPERSPORT 3",
+    "url": "http://93.93.113.95:25461/TV-Berati/XtreamCodes/496",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SCTV 22 - SSPORT 1 🇻🇳",
+    "url": "https://liveh34.vtvprime.vn/hls/SCTV22/03.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "ESPN DEPORTES | HD",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKotX1WJUaIcxrHIKsGvJ8_5U",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN SEC NETWORK | HD*",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKom6mej7VgUeq1rr7b_hP7yM",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN U | HD",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKoqnxV335U-pKIc-CSv9mSAo",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Big Ten Network Hd",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKosgURHRkWZtGAqgHVyG3_oA",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Marquee Sports Network",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKomHACVnxAUmTp4pkmDLfRPY",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "FIGHT NETWORK | HD",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKot68p5w9IB2LSSqDnR1qSHo",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "YES NETWORK",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKokdthlcrvEu91l_h8oFoCho",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "FOX Sports 1",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKon3GGx5n41tV31MckXg8P0g",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "StrongmanChampionLeague",
+    "url": "https://3f4b9dde8740443b9b90459fc7b67cdd.mediatailor.us-east-1.amazonaws.com/v1/manifest/04fd913bb278d8775298c26fdca9d9841f37601f/Samsung-gb_StrongmanChampionsLeague/e21d95be-bbb1-442c-bd84-71813dc764ce/0.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "fubo Sports Network",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKoq1gTHpxElE47HfoqeV4DM4",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "FOX Sports 2",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKoj_mJPf-ZrgKLWiICPTKPdI",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MSG",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKos2g8dHlIE-mDw7T9qadqZE",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MSG2",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKon1pnlMwcb24Hd2ovcAu_jk",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NBA TV",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKop__7aHckbHJMrzXxcxtY6w",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MotorTrend/Discovery Turbo",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKol5Rxr3Bdw6KbcRxqGYP60M",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NFL Redzone",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKouSZSMy1RmD-MBSJONZDmjY",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Outdoor",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKomE_65JXh7KNlgngZPPFFuA",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Sportsman",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKoqNtces3j6N7q1hcX3ME6mI",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NHL Network",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKok1WKq2TsHRj8v-_Scf-C2M",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NFL Network",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKotBmEzDb4II7tgp74GW83HU",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MSG+",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKovtAoB38jKd-wE00BnK0d9c",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NBC Universo (East)",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKouHl_S1cesmiVrwAgW3NGtM",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SportsNet NY",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKojLQWQb1Qaqrjzut8HchfvQ",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Tennis Channel",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKorKOEHwVFxD1-p28sJ3XJwY",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NEOX",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKoqSZOQyjswkQhTvo2-JQE28",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "The Golf Channel",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKorc3c6Fori5KjnCSsL1D8mE",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Fan Duel Racing (was TVG)",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKohEWkWmoKldM_obrvz1pGkg",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TyC Sports",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKouZ0c9zfx-rJmzsDFcYY3iQ",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "World Fishing Network",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKogme3oKr4y2Dk_VK5FISICQ",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Zona Futbol",
+    "url": "http://46.151.196.243:80/play/LMrv_fYorITF9qmDeTZKomdUckVZvM0MOlJf-L75NjE",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Strongman Champion League 1",
+    "url": "https://rightsboosterltd-scl-1-nl.samsung.wurl.tv/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Oman Sport",
+    "url": "https://partneta.cdn.mgmlcdn.com/omsport/smil:omsport.stream.smil/chunklist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Astro PremierLeague 2 (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163986.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "UK: MUTV",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/53717",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Arena Bola (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163987.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US Fox Sports 1",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/1846",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US: ESPN 1 (HD)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/9802",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US: ESPNU College Sports",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/10255",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "USA: NBA TV",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/20073",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US Golf Channel",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/9806",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "UK: SkySports Main Event",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/35243",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US: CBS Sports Network HD",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/10454",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "USA: NBC",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/46687",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US: ESPN 2",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/2210",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US Fox Sports 2 (A)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/1847",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US MAV TV (F)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/20977",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "US: Marquee Sports Network (HD)",
+    "url": "http://tvmate.icu:8080/69NpyV/884735/13379",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Astro Arena (MLY)",
+    "url": "http://front-main.eagle-4k.me/live/rmt8r91bac/tsleey7v5g/1163983.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TVRI Sport_(ott)",
+    "url": "https://ott-balancer.tvri.go.id/live/eds/SportHD/hls/SportHD.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Iraq Sport",
+    "url": "https://cdn.catiacast.video/abr/78054972db7708422595bc96c6e024ac/imn/news1/chunks.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "ESPN 3",
+    "url": "http://sinalprivado.info/live/632035/GqGcFV4ntu/22008.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "ESPN 4",
+    "url": "http://sinalprivado.info/live/632035/GqGcFV4ntu/22011.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "ESPN 2",
+    "url": "http://sinalprivado.info/live/632035/GqGcFV4ntu/22005.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "ESPN",
+    "url": "http://sinalprivado.info/live/632035/GqGcFV4ntu/22002.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "TDM Sports (720p)",
+    "url": "https://live3.tdm.com.mo/ch4/sport_ch4.live/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "WWE",
+    "url": "http://Supersonictv.live:8080/live/006779/439866/22185.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Kuwait Sports",
+    "url": "https://kwtspta.cdn.mangomolo.com/sp/smil:sp.stream.smil/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Bahrain Sports 1",
+    "url": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Bahrain Sports 2",
+    "url": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainsportstwo_all/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "ESPN 5",
+    "url": "http://sinalprivado.info/live/632035/GqGcFV4ntu/22014.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Swerve Combat",
+    "url": "https://dbrb49pjoymg4.cloudfront.net/10001/99991696/hls/playlist.m3u8?ads.xumo_channelId=99991696",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Win Sports + HD (colombia)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/13769.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TIGO SPORT (COSTA RICA)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/14877.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "UFC",
+    "url": "https://dbrb49pjoymg4.cloudfront.net/10001/99951134/hls/playlist.m3u8?ads.xumo_channelId=99951134",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Canal del Futbol HD (ecuador)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/2363.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TNT SPORTS»3«(chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417208.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TNT SPORTS»1«(chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417210.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MX ▎PLUTO TV LUCHA LIBRE AAA(pluto)",
+    "url": "https://service-stitcher.clusters.pluto.tv/stitch/hls/channel/5c01df1759ee03633e7b272c/master.m3u8?advertisingId=&appName=web&appStoreUrl=&appVersion=DNT&app_name=&architecture=&buildVersion=&deviceDNT=0&deviceId=5c01df1759ee03633e7b272c&deviceLat=&deviceLon=&deviceMake=web&deviceModel=web&deviceType=web&deviceVersion=DNT&includeExtendedEvents=false&marketingRegion=US&serverSideAds=false&sid=971&terminate=false&userId=",
+    "status": 200,
+    "contentType": "application/x-mpegurl; charset=utf-8"
+  },
+  {
+    "name": "MX ▎PLUTO TV LUCHA LIBRE AAA(roku)",
+    "url": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5c01df1759ee03633e7b272c/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+    "status": 200,
+    "contentType": "application/x-mpegurl; charset=utf-8"
+  },
+  {
+    "name": "TNT SPORTS PREMIUM»2«(chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417204.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Sky Sports Cricket (autum)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C688/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "TNT SPORTS PREMIUM»3«(chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417202.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Sony Sports 3 (autum)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C73/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "DIRECTV SPORTS (HD)»1«(chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417198.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "DIRECTV SPORTS (HD)»2«(chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417199.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN (HD)»2«(chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417182.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TNT SPORTS PREMIUM»1« (chile)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/417206.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PX SPORT(mexico)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/122513.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "CLARO SPORTS(guatemala)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/9177.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TUDN HD(mexico)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/122515.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "adrenalina Sports Network(mexico)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/122516.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SCTV 16",
+    "url": "https://liveh34.vtvprime.vn/hls/SCTV16/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Sony Sports 1 (autum1)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C65/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Sony Sports 4 (autum)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C244/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "AyM Sports HD(mexico)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/122518.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Sony Sports 2 (autum1)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C72/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Star Sports 1 (autum2)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C248/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Star Sports 2 (autum2)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C250/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Star Sports 1 (autum3)",
+    "url": "https://autumn-shape-b04a.soft-disk-1347.workers.dev/?url=http://maxotts.maxdigitaltv.com/x-media/C283/master.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Directv Sports (Perú)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/9462.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Movistar Deportes HD(peru)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/9465.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BR:SPORTV 3 HD",
+    "url": "http://canal-pro.xyz:8080/978280496tv3/951r8ui/27203",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BR:FOX SPORTS HD",
+    "url": "http://canal-pro.xyz:8080/978280496tv3/951r8ui/27167",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BR:ESPN 2 HD",
+    "url": "http://canal-pro.xyz:8080/978280496tv3/951r8ui/27157",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BR:SPORTV HD",
+    "url": "http://canal-pro.xyz:8080/978280496tv3/951r8ui/27204",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BR:FISH TV HD",
+    "url": "http://canal-pro.xyz:8080/978280496tv3/951r8ui/27161",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BR:SPORTV 2 HD",
+    "url": "http://canal-pro.xyz:8080/978280496tv3/951r8ui/27202",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Directv Sports + Plus(peru)",
+    "url": "http://rey-premium.ddns.net:80/DPVEduardoEspa/Espa020828/9464.ts",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SCTV 22 SPORT 1",
+    "url": "https://liveh34.vtvprime.vn/hls/SCTV22/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "FOX_SPORTS_HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/5118",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "FOX_SPORTS_3_HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/5117",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT DAZN/ELEVEN SPORTS 1 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7627",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT DAZN/ELEVEN SPORTS 2",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7628",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT DAZN/ELEVEN SPORTS 5",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7634",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT SPORT TV 2 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7707",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT SPORT TV 1 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7705",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT DAZN/ELEVEN SPORTS 5 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7635",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT SPORT TV 5 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7714",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PT SPORTING TV HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7715",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Eleven Sport 1 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/83536",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Eleven Sport 2 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/83537",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "DAZN F1 HD",
+    "url": "http://canal-pro.xyz:8080/978280496tv3/951r8ui/12397",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Rai Sport   HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/83429",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Eleven Sport 3 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/83538",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Eleven Sport 4 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/83539",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NBA TV",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/86294",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Euro Sport 1 HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/86292",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "beIN SPORTS MAX 2",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/86267",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TRT Spor HD",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/86302",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Tivibu  Spor 1",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/86299",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "A BOLA TV",
+    "url": "http://supersonictv.live:8080/Norman123/Norman123/7587",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MAVTV",
+    "url": "http://supersonictv.live:8080/006779/439866/22117",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "UFC Network",
+    "url": "http://supersonictv.live:8080/006779/439866/22177",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "WWE Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22185",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "FS 1",
+    "url": "http://supersonictv.live:8080/006779/439866/40398",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "FS 2",
+    "url": "http://supersonictv.live:8080/006779/439866/40399",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPNU UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22202",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN 2 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22199",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Bein Sports N Espanol UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22195",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "World Fishing Network",
+    "url": "http://supersonictv.live:8080/006779/439866/22183",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ACC Network",
+    "url": "http://supersonictv.live:8080/006779/439866/40389",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22198",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "CBS Sport Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40395",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN SEC Network",
+    "url": "http://supersonictv.live:8080/006779/439866/22208",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN Deportes UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/22222",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Golf UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40401",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MLB Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40402",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MSG",
+    "url": "http://supersonictv.live:8080/006779/439866/40404",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Marquee Sports Network",
+    "url": "http://supersonictv.live:8080/006779/439866/40408",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NBA TV UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40409",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NFL Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40412",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "NHL Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40413",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "YES Network UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40438",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "The Golf Channel",
+    "url": "http://supersonictv.live:8080/006779/439866/40434",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Willow Cricket Extra",
+    "url": "http://supersonictv.live:8080/006779/439866/40437",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Willow Cricket",
+    "url": "http://supersonictv.live:8080/006779/439866/40436",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Tennis Channel UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40433",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Fubo Sports Network",
+    "url": "http://supersonictv.live:8080/006779/439866/47752",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SkySports F1 FHD",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/35244",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SkySports PremierLeague",
+    "url": "http://fortv.cc:8080/3017851038/JACKWES2001@GMAIL.COM/35241",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Sportsman",
+    "url": "http://supersonictv.live:8080/006779/439866/47754",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BT Sports 2 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40442",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BT Sports 1 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40441",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "BT Sports 3 UHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40443",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PLAY SPORTS 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/3142",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ELEVEN SPORT 3",
+    "url": "http://31.43.191.125:8080/chile/123456789/3122",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Eurosport 1 FHD",
+    "url": "http://supersonictv.live:8080/006779/439866/40451",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TRACE SPORT STARS",
+    "url": "http://31.43.191.125:8080/chile/123456789/3156",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "PLAY SPORTS 3",
+    "url": "http://31.43.191.125:8080/chile/123456789/3173",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TRING SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/129302",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "TRING SPORT 1",
+    "url": "http://31.43.191.125:8080/chile/123456789/129299",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RTSH SPORT",
+    "url": "http://31.43.191.125:8080/chile/123456789/129214",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "EUROSPORT 1",
+    "url": "http://31.43.191.125:8080/chile/123456789/129073",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SUPER SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/129244",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "EUROSPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/129075",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ART SPORT 1",
+    "url": "http://31.43.191.125:8080/chile/123456789/129031",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ART SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/129033",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SUPER SPORT 1",
+    "url": "http://31.43.191.125:8080/chile/123456789/129242",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SUPER SPORTS NEWS",
+    "url": "http://31.43.191.125:8080/chile/123456789/129254",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SUPER SPORTS 5",
+    "url": "http://31.43.191.125:8080/chile/123456789/129250",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RO: DIGI SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/3175",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RO: DIGI SPORT 1",
+    "url": "http://31.43.191.125:8080/chile/123456789/3174",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RO: DIGI SPORT 4",
+    "url": "http://31.43.191.125:8080/chile/123456789/3177",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RO: DIGI SPORT 3",
+    "url": "http://31.43.191.125:8080/chile/123456789/3176",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RO: ORANGE SPORT 3",
+    "url": "http://31.43.191.125:8080/chile/123456789/3180",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RO: ORANGE SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/3179",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "RO: EUROSPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/3297",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MAX SPORT 1",
+    "url": "http://31.43.191.125:8080/chile/123456789/2987",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MAX SPORT 3",
+    "url": "http://31.43.191.125:8080/chile/123456789/2989",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "MAX SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/2988",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "DIEMA SPORT",
+    "url": "http://31.43.191.125:8080/chile/123456789/3336",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "DIEMA SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/3337",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ARENA SPORT 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/2992",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ARENA SPORT 3",
+    "url": "http://31.43.191.125:8080/chile/123456789/2993",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "WORLD FIGHT CHANNEL",
+    "url": "http://31.43.191.125:8080/chile/123456789/3405",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ARENA SPORT 5",
+    "url": "http://31.43.191.125:8080/chile/123456789/2995",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ARENA SPORT 6",
+    "url": "http://31.43.191.125:8080/chile/123456789/2996",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SPORT KLUB 2",
+    "url": "http://31.43.191.125:8080/chile/123456789/2998",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ARENA SPORT 1",
+    "url": "http://31.43.191.125:8080/chile/123456789/2991",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SPORT KLUB 3",
+    "url": "http://31.43.191.125:8080/chile/123456789/2999",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "SPORT KLUB 5",
+    "url": "http://31.43.191.125:8080/chile/123456789/3001",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "CANAL.ONCE",
+    "url": "https://vivo.canaloncelive.tv/alivepkgr3/ngrp:cepro_all/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "AYM.SPORTS",
+    "url": "https://aym-as.otteravision.com/aym/as/as.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Tennis Channel",
+    "url": "https://tennischannel-int-samsunguk.amagi.tv/playlist720_p.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Tennis Channel",
+    "url": "https://tennischannel-int-samsunguk.amagi.tv/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Turkmen Sport",
+    "url": "http://217.174.225.146/hls/ch004_720/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "INTERNETV.DEPORTES",
+    "url": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=5999",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "XSport",
+    "url": "http://iptv.prosto.tv:7000/ch110/video.m3u8",
+    "status": 200,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Horse & Country",
+    "url": "https://hnc-free-viewlift.amagi.tv/HNC_AUSTRALIA.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Астрахань.Ru Sport (720p)",
+    "url": "https://streaming.astrakhan.ru/astrakhanrusporthd/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "EQUALYMPIC HD",
+    "url": "http://cdnua03.hls.tv/476/hls/c4a7acbb4f6a85595a117f7aa2099d65/4779/stream.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Окко Спорт",
+    "url": "http://ua.online24.pm/play/7337/350B326FB34F4B8/video.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Turkmen Sport HD",
+    "url": "http://alpha.tv.online.tm/legacyhls/ch004_720/index.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Ziggo Sport Extra ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/187241",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Eurosport 1 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16294",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Ziggo Sport 6 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16277",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Esportes Brasília HD",
+    "url": "https://a.cdni.live/radioesporte/radioesporte/playlist.m3u8",
+    "status": 206,
+    "contentType": "application/vnd.apple.mpegurl"
+  },
+  {
+    "name": "Ziggo Sport 2 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16335",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN 2 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16284",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Ziggo Sport 4 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16333",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Ziggo Sport 5 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16276",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN 1 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16283",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Ziggo Sport 3  ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16336",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Race Channel ¹⁰⁸⁰ᵖ  (ENG Commentaar)",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/41358",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN 4 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16286",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "ESPN 3 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16285",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Ziggo Sport 1 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16307",
+    "status": 200,
+    "contentType": "video/mp2t"
+  },
+  {
+    "name": "Eurosport 2 ¹⁰⁸⁰ᵖ",
+    "url": "http://lemon.catchmeifyo.com:8000/9301834947/1675514161/16281",
+    "status": 200,
+    "contentType": "video/mp2t"
+  }
+]
