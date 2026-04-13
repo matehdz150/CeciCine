@@ -31,14 +31,11 @@ export default function SeriesPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(
-        "https://api.themoviedb.org/3/trending/tv/week",
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3Zjk5N2VmNWEzMDE5YTk0YzZmOGM5MDBhNzE0YzQ3ZSIsIm5iZiI6MTc3NTIwMzQ2Ni40NTksInN1YiI6IjY5Y2Y3NDhhMjFlYzhlZDRmNDJmNzRhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7lQHC9AKPP32GEqQpbq1xd5WdXhnYC5Z34lHPOY1hPE`,
-          },
-        }
-      );
+      const res = await fetch("https://api.themoviedb.org/3/trending/tv/week", {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3Zjk5N2VmNWEzMDE5YTk0YzZmOGM5MDBhNzE0YzQ3ZSIsIm5iZiI6MTc3NTIwMzQ2Ni40NTksInN1YiI6IjY5Y2Y3NDhhMjFlYzhlZDRmNDJmNzRhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7lQHC9AKPP32GEqQpbq1xd5WdXhnYC5Z34lHPOY1hPE`,
+        },
+      });
 
       const data = await res.json();
       setSeries(data.results || []);
@@ -63,7 +60,17 @@ export default function SeriesPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(`/api/search-tv?q=${q}`);
+      const res = await fetch(
+        `https://api.themoviedb.org/3/search/tv?query=${encodeURIComponent(
+          query,
+        )}&include_adult=false&language=es-MX&page=1`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3Zjk5N2VmNWEzMDE5YTk0YzZmOGM5MDBhNzE0YzQ3ZSIsIm5iZiI6MTc3NTIwMzQ2Ni40NTksInN1YiI6IjY5Y2Y3NDhhMjFlYzhlZDRmNDJmNzRhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7lQHC9AKPP32GEqQpbq1xd5WdXhnYC5Z34lHPOY1hPE`,
+            "Content-Type": "application/json",
+          },
+        },
+      );
       const data = await res.json();
 
       setSeries(data.results || []);
@@ -78,9 +85,7 @@ export default function SeriesPage() {
     <div className="bg-black min-h-screen text-white px-4 sm:px-8 py-6">
       {/* HEADER */}
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-6">
-          Series
-        </h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-6">Series</h1>
 
         {/* SEARCH */}
         <div className="relative mb-8">
@@ -96,9 +101,7 @@ export default function SeriesPage() {
 
         {/* GRID */}
         {loading ? (
-          <div className="text-center text-gray-400">
-            Cargando...
-          </div>
+          <div className="text-center text-gray-400">Cargando...</div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             {series.map((s) => (
@@ -115,9 +118,7 @@ export default function SeriesPage() {
                 </div>
 
                 <div className="mt-2">
-                  <p className="text-sm font-medium line-clamp-2">
-                    {s.name}
-                  </p>
+                  <p className="text-sm font-medium line-clamp-2">{s.name}</p>
 
                   <p className="text-xs text-gray-400">
                     {s.first_air_date?.slice(0, 4)} • ⭐{" "}
