@@ -50,9 +50,12 @@ export default function Page() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
           <div className="flex gap-4 text-xs sm:text-sm text-gray-400 overflow-x-auto">
             <span className="text-white whitespace-nowrap">Movie</span>
-            <span className="hover:text-white cursor-pointer whitespace-nowrap">
+            <button
+              onClick={() => router.push("/series")}
+              className="hover:text-white cursor-pointer whitespace-nowrap"
+            >
               TV Series
-            </span>
+            </button>
             <span className="hover:text-white cursor-pointer whitespace-nowrap">
               Variety
             </span>
