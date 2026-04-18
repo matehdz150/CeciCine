@@ -10,6 +10,8 @@ import {
 } from "@/lib/wyzie";
 
 const TIMEOUT = 5000;
+const MAX_SUBTITLES = 5;
+const MIN_SPANISH_SUBTITLES = 2;
 
 // =========================
 // 📦 TYPES
@@ -32,6 +34,11 @@ type CleanSubtitle = {
   url: string;
   lang: string;
   score: number;
+};
+
+type SubtitleTextSource = {
+  text: string;
+  weight: number;
 };
 
 // =========================
@@ -98,16 +105,22 @@ function normalize(str: string): string {
     .trim();
 }
 
-function getSubtitleTexts(subtitle: WyzieSubtitle) {
+function getSubtitleTexts(subtitle: WyzieSubtitle): SubtitleTextSource[] {
   return [
-    subtitle.media,
-    subtitle.release,
-    subtitle.fileName,
-    ...(subtitle.releases || []),
+    { value: subtitle.media, weight: 5 },
+    { value: subtitle.release, weight: 4 },
+    { value: subtitle.fileName, weight: 3 },
+    ...(subtitle.releases || []).map((value) => ({ value, weight: 2 })),
   ]
-    .filter((value): value is string => typeof value === "string" && value.length > 0)
-    .map(normalize)
-    .filter(Boolean);
+    .filter(
+      (entry): entry is { value: string; weight: number } =>
+        typeof entry.value === "string" && entry.value.length > 0,
+    )
+    .map((entry) => ({
+      text: normalize(entry.value),
+      weight: entry.weight,
+    }))
+    .filter((entry) => Boolean(entry.text));
 }
 
 function getMeaningfulWords(title: string) {
@@ -131,20 +144,33 @@ function getMeaningfulWords(title: string) {
     .filter((word) => word.length > 2 && !stopWords.has(word));
 }
 
-function titleMatchesText(text: string, candidateTitle: string) {
+function getTitleMatchScore(text: string, candidateTitle: string) {
   const normalizedCandidate = normalize(candidateTitle);
 
-  if (!normalizedCandidate) return false;
-  if (text.includes(normalizedCandidate)) return true;
+  if (!normalizedCandidate) return 0;
+  if (text === normalizedCandidate) return 120;
+  if (text.includes(normalizedCandidate)) return 100;
 
   const words = getMeaningfulWords(candidateTitle);
 
-  if (words.length === 0) return false;
+  if (words.length === 0) return 0;
 
   const matches = words.filter((word) => text.includes(word));
-  const minMatches = Math.min(words.length, Math.max(2, Math.ceil(words.length * 0.8)));
+  const ratio = matches.length / words.length;
 
-  return matches.length >= minMatches;
+  if (matches.length >= 2 && ratio >= 0.9) {
+    return 85 + matches.length * 4;
+  }
+
+  if (matches.length >= 2 && ratio >= 0.8) {
+    return 70 + matches.length * 3;
+  }
+
+  if (matches.length >= 3 && ratio >= 0.7) {
+    return 55 + matches.length * 2;
+  }
+
+  return 0;
 }
 
 function yearMatchesText(text: string, year?: string) {
@@ -160,6 +186,40 @@ function yearMatchesText(text: string, year?: string) {
 // =========================
 // 🔥 FILTRO REAL
 // =========================
+function getSubtitleMatchScore(
+  s: WyzieSubtitle,
+  title: string,
+  originalTitle?: string,
+  year?: string
+): number {
+  if (!title) return 0;
+
+  const sources = getSubtitleTexts(s);
+  const titleCandidates = [title, originalTitle]
+    .filter((value): value is string => typeof value === "string" && value.trim().length > 0);
+
+  if (sources.length === 0) return 0;
+
+  let bestScore = 0;
+
+  for (const source of sources) {
+    if (!yearMatchesText(source.text, year)) continue;
+
+    for (const candidateTitle of titleCandidates) {
+      const matchScore = getTitleMatchScore(source.text, candidateTitle);
+
+      if (matchScore > 0) {
+        bestScore = Math.max(bestScore, matchScore + source.weight);
+      }
+    }
+  }
+
+  return bestScore;
+}
+
+// =========================
+// 🔥 FILTRO REAL
+// =========================
 function isRelevantSubtitle(
   s: WyzieSubtitle,
   title: string,
@@ -168,19 +228,7 @@ function isRelevantSubtitle(
 ): boolean {
   if (!title) return true;
 
-  const sources = getSubtitleTexts(s);
-  const titleCandidates = [title, originalTitle]
-    .filter((value): value is string => typeof value === "string" && value.trim().length > 0);
-
-  if (sources.length === 0) return false;
-
-  return sources.some((text) => {
-    if (!yearMatchesText(text, year)) return false;
-
-    return titleCandidates.some((candidateTitle) =>
-      titleMatchesText(text, candidateTitle),
-    );
-  });
+  return getSubtitleMatchScore(s, title, originalTitle, year) >= 60;
 }
 
 // =========================
@@ -246,7 +294,7 @@ export async function GET(req: NextRequest) {
     .map((s) => ({
       url: s.url,
       lang: getWyzieLanguage(s),
-      score: getScore(s),
+      score: getScore(s) + getSubtitleMatchScore(s, title, originalTitle, year),
     }));
 
   console.log("🧩 wyzie subtitles es/en:", subtitles.length, "tmdbId:", tmdbId);
@@ -266,19 +314,49 @@ export async function GET(req: NextRequest) {
   // 🥇 ordenar
   // =========================
   unique.sort((a, b) => {
+    if (a.score !== b.score) return b.score - a.score;
     if (a.lang !== b.lang) {
       if (isSpanishLanguage(a.lang)) return -1;
       if (isSpanishLanguage(b.lang)) return 1;
       if (isEnglishLanguage(a.lang)) return -1;
       if (isEnglishLanguage(b.lang)) return 1;
     }
-    return b.score - a.score;
+    return 0;
   });
+
+  const selected: CleanSubtitle[] = [];
+  const selectedUrls = new Set<string>();
+
+  const spanishCandidates = unique.filter((subtitle) =>
+    isSpanishLanguage(subtitle.lang),
+  );
+
+  for (const subtitle of spanishCandidates.slice(0, MIN_SPANISH_SUBTITLES)) {
+    selected.push(subtitle);
+    selectedUrls.add(subtitle.url);
+  }
+
+  for (const subtitle of unique) {
+    if (selected.length >= MAX_SUBTITLES) break;
+    if (selectedUrls.has(subtitle.url)) continue;
+
+    selected.push(subtitle);
+    selectedUrls.add(subtitle.url);
+  }
+
+  console.log(
+    "🧩 wyzie subtitles selected:",
+    selected.length,
+    "spanish:",
+    selected.filter((subtitle) => isSpanishLanguage(subtitle.lang)).length,
+    "tmdbId:",
+    tmdbId,
+  );
 
   // =========================
   // 🔥 proxy
   // =========================
-  const proxied = unique.map((s) => ({
+  const proxied = selected.map((s) => ({
     url: `/api/subtitle?url=${encodeURIComponent(s.url)}`,
     lang: s.lang,
   }));
