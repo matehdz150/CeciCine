@@ -150,7 +150,7 @@ function titleMatchesText(text: string, candidateTitle: string) {
 function yearMatchesText(text: string, year?: string) {
   if (!year) return true;
 
-  const years = text.match(/\b(19|20)\d{2}\b/g) || [];
+  const years: string[] = text.match(/\b(?:19|20)\d{2}\b/g) ?? [];
 
   if (years.length === 0) return true;
 
