@@ -7,6 +7,7 @@ import { ArrowLeft, Calendar, Flame, Globe, Star } from "lucide-react";
 
 type Movie = {
   title: string;
+  original_title?: string;
   release_date?: string;
   backdrop_path?: string;
   poster_path?: string;
@@ -56,6 +57,8 @@ export default function WatchClient({ id }: { id: string }) {
         fetch(
           `/api/subtitles?tmdbId=${id}&title=${encodeURIComponent(
             movie.title,
+          )}&originalTitle=${encodeURIComponent(
+            movie.original_title || "",
           )}&year=${movie.release_date?.slice(0, 4)}`,
         ),
       ]);

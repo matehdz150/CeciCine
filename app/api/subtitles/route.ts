@@ -19,6 +19,7 @@ type WyzieSubtitle = {
   language?: string;
   lang?: string;
   display?: string;
+  media?: string;
   downloadCount?: number;
   release?: string;
   fileName?: string;
@@ -90,9 +91,70 @@ function getScore(s: WyzieSubtitle): number {
 function normalize(str: string): string {
   return str
     .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function getSubtitleTexts(subtitle: WyzieSubtitle) {
+  return [
+    subtitle.media,
+    subtitle.release,
+    subtitle.fileName,
+    ...(subtitle.releases || []),
+  ]
+    .filter((value): value is string => typeof value === "string" && value.length > 0)
+    .map(normalize)
+    .filter(Boolean);
+}
+
+function getMeaningfulWords(title: string) {
+  const stopWords = new Set([
+    "a",
+    "an",
+    "and",
+    "de",
+    "del",
+    "el",
+    "la",
+    "las",
+    "los",
+    "of",
+    "the",
+    "y",
+  ]);
+
+  return normalize(title)
+    .split(" ")
+    .filter((word) => word.length > 2 && !stopWords.has(word));
+}
+
+function titleMatchesText(text: string, candidateTitle: string) {
+  const normalizedCandidate = normalize(candidateTitle);
+
+  if (!normalizedCandidate) return false;
+  if (text.includes(normalizedCandidate)) return true;
+
+  const words = getMeaningfulWords(candidateTitle);
+
+  if (words.length === 0) return false;
+
+  const matches = words.filter((word) => text.includes(word));
+  const minMatches = Math.min(words.length, Math.max(2, Math.ceil(words.length * 0.8)));
+
+  return matches.length >= minMatches;
+}
+
+function yearMatchesText(text: string, year?: string) {
+  if (!year) return true;
+
+  const years = text.match(/\b(19|20)\d{2}\b/g) || [];
+
+  if (years.length === 0) return true;
+
+  return years.includes(year);
 }
 
 // =========================
@@ -101,29 +163,23 @@ function normalize(str: string): string {
 function isRelevantSubtitle(
   s: WyzieSubtitle,
   title: string,
+  originalTitle?: string,
   year?: string
 ): boolean {
   if (!title) return true;
 
-  const target = normalize(title);
+  const sources = getSubtitleTexts(s);
+  const titleCandidates = [title, originalTitle]
+    .filter((value): value is string => typeof value === "string" && value.trim().length > 0);
 
-  const sources = [
-    s.release,
-    s.fileName,
-    ...(s.releases || []),
-  ]
-    .filter((v): v is string => typeof v === "string" && v.length > 0)
-    .map(normalize);
+  if (sources.length === 0) return false;
 
   return sources.some((text) => {
-    if (year && !text.includes(year)) return false;
+    if (!yearMatchesText(text, year)) return false;
 
-    if (text.includes(target)) return true;
-
-    const words = target.split(" ");
-    const matches = words.filter((w) => text.includes(w));
-
-    return matches.length >= Math.ceil(words.length * 0.6);
+    return titleCandidates.some((candidateTitle) =>
+      titleMatchesText(text, candidateTitle),
+    );
   });
 }
 
@@ -133,6 +189,7 @@ function isRelevantSubtitle(
 export async function GET(req: NextRequest) {
   const tmdbId = req.nextUrl.searchParams.get("tmdbId");
   const title = req.nextUrl.searchParams.get("title") || "";
+  const originalTitle = req.nextUrl.searchParams.get("originalTitle") || "";
   const year = req.nextUrl.searchParams.get("year") || "";
   const apiKey = getWyzieApiKey();
 
@@ -162,12 +219,21 @@ export async function GET(req: NextRequest) {
   // 🔥 FILTRO
   // =========================
   const filtered = data.filter((s) =>
-    isRelevantSubtitle(s, title, year)
+    isRelevantSubtitle(s, title, originalTitle, year)
   );
 
-  console.log("🧩 wyzie subtitles filtered:", filtered.length, "title:", title, "year:", year);
+  console.log(
+    "🧩 wyzie subtitles filtered:",
+    filtered.length,
+    "title:",
+    title,
+    "originalTitle:",
+    originalTitle,
+    "year:",
+    year,
+  );
 
-  const source = filtered.length > 0 ? filtered : data;
+  const source = title ? filtered : data;
 
   // =========================
   // 🧠 MAP SAFE
