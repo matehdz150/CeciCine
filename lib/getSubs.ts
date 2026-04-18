@@ -1,10 +1,26 @@
+import { getWyzieApiKey, getWyzieLanguage } from "./wyzie";
+
 // lib/getSubs.ts
+type WyzieSubtitleRecord = {
+  url?: string;
+  language?: string;
+  lang?: string;
+  display?: string;
+};
+
 export async function getWyzieSubs(tmdbId: string) {
+  const apiKey = getWyzieApiKey();
+
+  if (!apiKey) {
+    throw new Error("missing WYZIE_API_KEY");
+  }
+
   const params = new URLSearchParams({
     id: tmdbId,
+    format: "srt,vtt",
   });
 
-  params.set("key", process.env.WYZIE_API_KEY!);
+  params.set("key", apiKey);
 
   const res = await fetch(
     `https://sub.wyzie.io/search?${params.toString()}`
@@ -16,10 +32,12 @@ export async function getWyzieSubs(tmdbId: string) {
     throw new Error("wyzie failed");
   }
 
-  const data = await res.json();
+  const data = (await res.json()) as WyzieSubtitleRecord[];
 
-  return (data || []).map((s: any) => ({
-    url: s.url,
-    lang: s.language || s.lang || "unknown",
-  }));
+  return (data || [])
+    .filter((s): s is WyzieSubtitleRecord & { url: string } => Boolean(s.url))
+    .map((s) => ({
+      url: s.url,
+      lang: getWyzieLanguage(s),
+    }));
 }

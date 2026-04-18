@@ -1,6 +1,12 @@
 // app/api/subtitles/route.ts
 
 import { NextRequest } from "next/server";
+import {
+  getWyzieApiKey,
+  getWyzieLanguage,
+  isEnglishLanguage,
+  isSpanishLanguage,
+} from "@/lib/wyzie";
 
 const TIMEOUT = 5000;
 
@@ -10,6 +16,8 @@ const TIMEOUT = 5000;
 type WyzieSubtitle = {
   url?: string;
   language?: string;
+  lang?: string;
+  display?: string;
   downloadCount?: number;
   release?: string;
   fileName?: string;
@@ -125,14 +133,20 @@ export async function GET(req: NextRequest) {
   const tmdbId = req.nextUrl.searchParams.get("tmdbId");
   const title = req.nextUrl.searchParams.get("title") || "";
   const year = req.nextUrl.searchParams.get("year") || "";
+  const apiKey = getWyzieApiKey();
 
   if (!tmdbId) {
     return Response.json({ success: false, subtitles: [] });
   }
 
+  if (!apiKey) {
+    console.log("❌ WYZIE_API_KEY missing");
+    return Response.json({ success: false, subtitles: [] });
+  }
+
   const params = new URLSearchParams({
     id: tmdbId,
-    key: process.env.WYZIE_API_KEY ?? "",
+    key: apiKey,
     format: "srt,vtt",
     language: "es,en",
   });
@@ -141,6 +155,8 @@ export async function GET(req: NextRequest) {
     `https://sub.wyzie.io/search?${params.toString()}`
   );
 
+  console.log("🧩 wyzie subtitles total:", data.length, "tmdbId:", tmdbId);
+
   // =========================
   // 🔥 FILTRO
   // =========================
@@ -148,18 +164,20 @@ export async function GET(req: NextRequest) {
     isRelevantSubtitle(s, title, year)
   );
 
+  console.log("🧩 wyzie subtitles filtered:", filtered.length, "title:", title, "year:", year);
+
   const source = filtered.length > 0 ? filtered : data;
 
   // =========================
   // 🧠 MAP SAFE
   // =========================
   const subtitles: CleanSubtitle[] = source
-    .filter((s): s is Required<Pick<WyzieSubtitle, "url" | "language">> =>
-      Boolean(s.url && s.language)
+    .filter((s): s is WyzieSubtitle & { url: string } =>
+      Boolean(s.url && getWyzieLanguage(s))
     )
     .map((s) => ({
       url: s.url,
-      lang: s.language,
+      lang: getWyzieLanguage(s),
       score: getScore(s),
     }));
 
@@ -179,8 +197,10 @@ export async function GET(req: NextRequest) {
   // =========================
   unique.sort((a, b) => {
     if (a.lang !== b.lang) {
-      if (a.lang === "es") return -1;
-      if (b.lang === "es") return 1;
+      if (isSpanishLanguage(a.lang)) return -1;
+      if (isSpanishLanguage(b.lang)) return 1;
+      if (isEnglishLanguage(a.lang)) return -1;
+      if (isEnglishLanguage(b.lang)) return 1;
     }
     return b.score - a.score;
   });
