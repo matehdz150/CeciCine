@@ -1,20 +1,26 @@
-import { extractVideoData } from "@/lib/extractM3U8";
+import { buildExtractorUrl } from "@/lib/extractorService";
 import { getWyzieSubs } from "@/lib/getSubs";
 import { NextRequest } from "next/server";
 
+type Subtitle = {
+  url: string;
+  lang: string;
+};
+
+type PlayResult = {
+  success: true;
+  stream: string;
+  subtitles: Subtitle[];
+  provider: string;
+};
+
+type ExtractorResponse = {
+  stream?: string;
+  subtitles?: string[];
+};
+
 // 🔥 cache simple (puedes cambiar a Redis después)
-const cache = new Map<string, any>();
-
-// ⏱️ timeout + abort real
-function withTimeout<T>(fn: (signal: AbortSignal) => Promise<T>, ms: number) {
-  const controller = new AbortController();
-
-  const timeout = setTimeout(() => {
-    controller.abort();
-  }, ms);
-
-  return fn(controller.signal).finally(() => clearTimeout(timeout));
-}
+const cache = new Map<string, PlayResult>();
 
 export async function GET(req: NextRequest) {
   const tmdbId = req.nextUrl.searchParams.get("tmdbId");
@@ -68,10 +74,9 @@ export async function GET(req: NextRequest) {
 
       
 
-      const data = await fetch(
-        `https://extractormicroservice-production.up.railway.app/extract?url=${encodeURIComponent(url)}`,
-        { signal: controller.signal },
-      ).then((r) => r.json());
+      const data = await fetch(buildExtractorUrl(url), {
+        signal: controller.signal,
+      }).then((r) => r.json() as Promise<ExtractorResponse>);
 
       console.log("📦 extractor response:", data);
 
@@ -83,7 +88,7 @@ export async function GET(req: NextRequest) {
       console.log("🏆 ganador:", url);
 
       // 🎬 SUBS
-      let wyzieSubs: any[] = [];
+      let wyzieSubs: Subtitle[] = [];
 
       try {
         wyzieSubs = await getWyzieSubs(tmdbId);
@@ -99,10 +104,10 @@ export async function GET(req: NextRequest) {
               lang: "unknown",
             }));
 
-      const result = {
+      const result: PlayResult = {
         success: true,
         stream: `/api/stream?url=${encodeURIComponent(data.stream)}`,
-        subtitles: finalSubs.map((s: any) => ({
+        subtitles: finalSubs.map((s) => ({
           url: `/api/subtitle?url=${encodeURIComponent(s.url)}`,
           lang: s.lang,
         })),
@@ -113,11 +118,11 @@ export async function GET(req: NextRequest) {
       cache.set(tmdbId, result);
 
       return Response.json(result);
-    } catch (e: any) {
-      if (e?.name === "AbortError") {
+    } catch (e: unknown) {
+      if (e instanceof Error && e.name === "AbortError") {
         console.log("⏱️ timeout:", url);
       } else {
-        console.log("💀 error:", url, e?.message || e);
+        console.log("💀 error:", url, e instanceof Error ? e.message : e);
       }
     }
   }

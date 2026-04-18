@@ -1,7 +1,25 @@
 import { NextRequest } from "next/server";
+import { buildExtractorUrl } from "@/lib/extractorService";
 import { getWyzieSubs } from "@/lib/getSubs";
 
-const cache = new Map<string, any>();
+type Subtitle = {
+  url: string;
+  lang: string;
+};
+
+type PlayTvResult = {
+  success: true;
+  stream: string;
+  subtitles: Subtitle[];
+  provider: string;
+};
+
+type ExtractorResponse = {
+  stream?: string;
+  subtitles?: string[];
+};
+
+const cache = new Map<string, PlayTvResult>();
 
 export async function GET(req: NextRequest) {
   const tmdbId = req.nextUrl.searchParams.get("tmdbId");
@@ -40,10 +58,9 @@ export async function GET(req: NextRequest) {
       setTimeout(() => controller.abort(), 25000);
 
       // 🔥 USAR TU MICROSERVICIO EXTRACTOR
-      const data = await fetch(
-        `https://extractormicroservice-production.up.railway.app/extract?url=${encodeURIComponent(url)}`,
-        { signal: controller.signal }
-      ).then((r) => r.json());
+      const data = await fetch(buildExtractorUrl(url), {
+        signal: controller.signal,
+      }).then((r) => r.json() as Promise<ExtractorResponse>);
 
       console.log("📦 extractor TV:", data);
 
@@ -55,7 +72,7 @@ export async function GET(req: NextRequest) {
       console.log("🏆 ganador TV:", url);
 
       // 🎬 SUBS
-      let wyzieSubs: any[] = [];
+      let wyzieSubs: Subtitle[] = [];
 
       try {
         wyzieSubs = await getWyzieSubs(tmdbId);
@@ -71,10 +88,10 @@ export async function GET(req: NextRequest) {
               lang: "unknown",
             }));
 
-      const result = {
+      const result: PlayTvResult = {
         success: true,
         stream: `/api/stream?url=${encodeURIComponent(data.stream)}`,
-        subtitles: finalSubs.map((s: any) => ({
+        subtitles: finalSubs.map((s) => ({
           url: `/api/subtitle?url=${encodeURIComponent(s.url)}`,
           lang: s.lang,
         })),
@@ -84,11 +101,11 @@ export async function GET(req: NextRequest) {
       cache.set(cacheKey, result);
 
       return Response.json(result);
-    } catch (e: any) {
-      if (e?.name === "AbortError") {
+    } catch (e: unknown) {
+      if (e instanceof Error && e.name === "AbortError") {
         console.log("⏱️ timeout:", url);
       } else {
-        console.log("💀 error:", url, e?.message || e);
+        console.log("💀 error:", url, e instanceof Error ? e.message : e);
       }
     }
   }

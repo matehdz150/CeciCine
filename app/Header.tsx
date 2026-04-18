@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Search, Menu, X } from "lucide-react";
 
 export default function Header({
@@ -8,13 +9,32 @@ export default function Header({
 }: {
   onSearch?: (q: string) => void;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
   const handleSearch = () => {
-    if (!query.trim()) return;
-    onSearch?.(query);
+    const trimmedQuery = query.trim();
+
+    if (!trimmedQuery) return;
+
+    const targetBase =
+      pathname.startsWith("/series") || pathname.startsWith("/watch/tv")
+        ? "/series"
+        : "/";
+
+    router.push(`${targetBase}?q=${encodeURIComponent(trimmedQuery)}`);
+    onSearch?.(trimmedQuery);
+
+    setMenuOpen(false);
+    setSearchOpen(false);
+  };
+
+  const navigateTo = (href: string) => {
+    router.push(href);
+    setMenuOpen(false);
     setSearchOpen(false);
   };
 
@@ -35,20 +55,34 @@ export default function Header({
               </button>
 
               {/* LOGO */}
-              <h1 className="text-lg sm:text-2xl font-bold tracking-tight">
-                Ceci<span className="text-amber-400">+</span>
-              </h1>
+              <button
+                onClick={() => navigateTo("/")}
+                className="text-lg sm:text-2xl font-bold tracking-tight"
+              >
+                C<span className="text-amber-400">+</span>
+              </button>
 
               {/* NAV DESKTOP */}
               <nav className="hidden md:flex gap-6 text-sm text-white/60">
-                <span className="text-white cursor-pointer">Home</span>
-                <span className="hover:text-white cursor-pointer transition">
+                <button
+                  onClick={() => navigateTo("/")}
+                  className="text-white cursor-pointer"
+                >
+                  Home
+                </button>
+                <button
+                  onClick={() => navigateTo("/")}
+                  className="hover:text-white cursor-pointer transition"
+                >
                   Movies
-                </span>
-                <span className="hover:text-white cursor-pointer transition">
+                </button>
+                <button
+                  onClick={() => navigateTo("/series")}
+                  className="hover:text-white cursor-pointer transition"
+                >
                   Series
-                </span>
-                <span className="hover:text-white cursor-pointer transition">
+                </button>
+                <span className="hover:text-white cursor-default transition">
                   My List
                 </span>
               </nav>
@@ -56,11 +90,10 @@ export default function Header({
 
             {/* RIGHT */}
             <div className="flex items-center gap-3">
-
               {/* SEARCH ICON (mobile) */}
               <button
                 onClick={() => setSearchOpen((prev) => !prev)}
-                className="text-white/80 active:scale-95"
+                className="sm:hidden text-white/80 active:scale-95"
               >
                 <Search size={20} />
               </button>
@@ -74,6 +107,12 @@ export default function Header({
                   placeholder="Search..."
                   className="bg-transparent outline-none text-sm px-2 w-40 text-white"
                 />
+                <button
+                  onClick={handleSearch}
+                  className="text-white/80 hover:text-white active:scale-95"
+                >
+                  <Search size={18} />
+                </button>
               </div>
             </div>
           </div>
@@ -90,6 +129,12 @@ export default function Header({
                   placeholder="Search..."
                   className="bg-transparent outline-none text-sm flex-1 text-white"
                 />
+                <button
+                  onClick={handleSearch}
+                  className="text-white/80 hover:text-white active:scale-95"
+                >
+                  <Search size={18} />
+                </button>
               </div>
             </div>
           )}
@@ -114,9 +159,18 @@ export default function Header({
 
           {/* NAV */}
           <nav className="flex flex-col gap-4 text-lg">
-            <span className="text-white">Home</span>
-            <span className="text-white/70">Movies</span>
-            <span className="text-white/70">Series</span>
+            <button onClick={() => navigateTo("/")} className="text-left text-white">
+              Home
+            </button>
+            <button onClick={() => navigateTo("/")} className="text-left text-white/70">
+              Movies
+            </button>
+            <button
+              onClick={() => navigateTo("/series")}
+              className="text-left text-white/70"
+            >
+              Series
+            </button>
             <span className="text-white/70">My List</span>
           </nav>
         </div>
