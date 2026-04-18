@@ -1,4 +1,8 @@
-import { getWyzieApiKey, getWyzieLanguage } from "./wyzie";
+import {
+  getWyzieApiKey,
+  getWyzieLanguage,
+  isSupportedSubtitleLanguage,
+} from "./wyzie";
 
 // lib/getSubs.ts
 type WyzieSubtitleRecord = {
@@ -36,6 +40,7 @@ export async function getWyzieSubs(tmdbId: string) {
 
   return (data || [])
     .filter((s): s is WyzieSubtitleRecord & { url: string } => Boolean(s.url))
+    .filter((s) => isSupportedSubtitleLanguage(getWyzieLanguage(s)))
     .map((s) => ({
       url: s.url,
       lang: getWyzieLanguage(s),

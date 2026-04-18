@@ -22,3 +22,7 @@ export function isEnglishLanguage(lang: string) {
   const normalized = lang.toLowerCase();
   return normalized === "en" || normalized.startsWith("en-") || normalized.includes("english");
 }
+
+export function isSupportedSubtitleLanguage(lang: string) {
+  return isSpanishLanguage(lang) || isEnglishLanguage(lang);
+}

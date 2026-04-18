@@ -6,6 +6,7 @@ import {
   getWyzieLanguage,
   isEnglishLanguage,
   isSpanishLanguage,
+  isSupportedSubtitleLanguage,
 } from "@/lib/wyzie";
 
 const TIMEOUT = 5000;
@@ -175,11 +176,14 @@ export async function GET(req: NextRequest) {
     .filter((s): s is WyzieSubtitle & { url: string } =>
       Boolean(s.url && getWyzieLanguage(s))
     )
+    .filter((s) => isSupportedSubtitleLanguage(getWyzieLanguage(s)))
     .map((s) => ({
       url: s.url,
       lang: getWyzieLanguage(s),
       score: getScore(s),
     }));
+
+  console.log("🧩 wyzie subtitles es/en:", subtitles.length, "tmdbId:", tmdbId);
 
   // =========================
   // 🔁 dedupe
