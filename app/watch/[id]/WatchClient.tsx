@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Player from "@/app/player";
+import { pickSubtitleSource } from "@/lib/subtitleSelection";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Calendar, Flame, Globe, Star } from "lucide-react";
 
@@ -33,19 +34,6 @@ export default function WatchClient({ id }: { id: string }) {
       .then((data) => setMovie(data));
   }, [id]);
 
-  const mergeSubtitles = (
-    primary: { url: string; lang: string }[] = [],
-    secondary: { url: string; lang: string }[] = [],
-  ) => {
-    const seen = new Set<string>();
-
-    return [...primary, ...secondary].filter((subtitle) => {
-      if (!subtitle?.url || seen.has(subtitle.url)) return false;
-      seen.add(subtitle.url);
-      return true;
-    });
-  };
-
   const handlePlay = async () => {
     if (!movie) return;
 
@@ -69,9 +57,7 @@ export default function WatchClient({ id }: { id: string }) {
       console.log("SUBS FILTRADOS:", subsData);
 
       setStream(playData.stream);
-      setSubtitles(
-        mergeSubtitles(playData.subtitles || [], subsData.subtitles || []),
-      );
+      setSubtitles(pickSubtitleSource(subsData.subtitles || [], playData.subtitles || []));
     } catch (e) {
       console.error("play error", e);
     }

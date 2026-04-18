@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Player from "@/app/player";
+import { pickSubtitleSource } from "@/lib/subtitleSelection";
 
 export default function WatchTVPage() {
   const { id, season, episode } = useParams();
@@ -12,19 +13,6 @@ export default function WatchTVPage() {
   const [subtitles, setSubtitles] = useState<
     { url: string; lang: string }[]
   >([]);
-
-  const mergeSubtitles = (
-    primary: { url: string; lang: string }[] = [],
-    secondary: { url: string; lang: string }[] = [],
-  ) => {
-    const seen = new Set<string>();
-
-    return [...primary, ...secondary].filter((subtitle) => {
-      if (!subtitle?.url || seen.has(subtitle.url)) return false;
-      seen.add(subtitle.url);
-      return true;
-    });
-  };
 
   useEffect(() => {
     const load = async () => {
@@ -41,7 +29,7 @@ export default function WatchTVPage() {
 
         setStream(playData.stream);
         setSubtitles(
-          mergeSubtitles(playData.subtitles || [], subsData.subtitles || []),
+          pickSubtitleSource(subsData.subtitles || [], playData.subtitles || []),
         );
       } catch (e) {
         console.error(e);

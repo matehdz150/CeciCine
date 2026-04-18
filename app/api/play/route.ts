@@ -3,6 +3,7 @@ import {
   getExtractorServiceUrls,
 } from "@/lib/extractorService";
 import { getWyzieSubs } from "@/lib/getSubs";
+import { limitSubtitles } from "@/lib/subtitleSelection";
 import { NextRequest } from "next/server";
 
 type Subtitle = {
@@ -160,10 +161,12 @@ export async function GET(req: NextRequest) {
               lang: "unknown",
             }));
 
+      const selectedSubtitles = limitSubtitles(finalSubs);
+
       const result: PlayResult = {
         success: true,
         stream: `/api/stream?url=${encodeURIComponent(data.stream)}`,
-        subtitles: finalSubs.map((s) => ({
+        subtitles: selectedSubtitles.map((s) => ({
           url: `/api/subtitle?url=${encodeURIComponent(s.url)}`,
           lang: s.lang,
         })),
