@@ -36,6 +36,20 @@ type SubtitleItem = {
   lang: string;
 };
 
+function normalizeSubtitleUrl(url: string) {
+  if (url.startsWith("/api/subtitle")) return url;
+  return `/api/subtitle?url=${encodeURIComponent(url)}`;
+}
+
+function getTrackLangCode(lang: string) {
+  const normalized = lang.toLowerCase();
+
+  if (normalized.includes("es")) return "es";
+  if (normalized.includes("en")) return "en";
+
+  return "und";
+}
+
 export default function Player({
   src,
   subtitles = [],
@@ -60,8 +74,11 @@ export default function Player({
     null,
   );
   const [subtitleMenuOpen, setSubtitleMenuOpen] = useState(false);
+  const selectedSubtitle = subtitles.find(
+    (subtitle) => subtitle.url === selectedSubtitleUrl,
+  );
 
-  const hideTimeout = useRef<any>(null);
+  const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // =========================
   // 🎬 HLS + AUTOPLAY FIX
@@ -85,6 +102,18 @@ export default function Player({
 
     video.src = src;
   }, [src]);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   // =========================
   // ⏱️ TIME
@@ -128,7 +157,12 @@ export default function Player({
     const video = videoRef.current;
     if (!video) return;
 
-    video.paused ? video.play() : video.pause();
+    if (video.paused) {
+      video.play().catch(() => {});
+      return;
+    }
+
+    video.pause();
   };
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -166,7 +200,9 @@ export default function Player({
 
     setShowControls(true);
 
-    clearTimeout(hideTimeout.current);
+    if (hideTimeout.current) {
+      clearTimeout(hideTimeout.current);
+    }
     hideTimeout.current = setTimeout(() => {
       setShowControls(false);
     }, 2500);
@@ -181,32 +217,29 @@ export default function Player({
     const track = trackRef.current;
     const video = videoRef.current;
 
-    // 🔥 reset duro
-    track.track.mode = "disabled";
-    track.removeAttribute("src");
-
     if (!selectedSubtitleUrl) return;
 
-    let finalUrl = selectedSubtitleUrl;
+    Array.from(video.textTracks).forEach((textTrack) => {
+      textTrack.mode = "disabled";
+    });
 
-    // 🔥 evitar doble proxy
-    if (!selectedSubtitleUrl.startsWith("/api/subtitle")) {
-      finalUrl = `/api/subtitle?url=${encodeURIComponent(selectedSubtitleUrl)}`;
-    }
+    const enableTrack = () => {
+      try {
+        track.track.mode = "showing";
+      } catch (error) {
+        console.error("subtitle track enable error", error);
+      }
+    };
 
-    // 🔥 set nuevo src
-    track.src = finalUrl;
+    track.addEventListener("load", enableTrack);
+    enableTrack();
 
-    // 🔥 importante: marcar como default (ayuda a algunos browsers)
-    track.default = true;
-
-    // 🔥 reload correcto (NO track.load)
-    video.load();
-
-    // 🔥 activar subtítulos
-    setTimeout(() => {
-      track.track.mode = "showing";
-    }, 100);
+    return () => {
+      track.removeEventListener("load", enableTrack);
+      Array.from(video.textTracks).forEach((textTrack) => {
+        textTrack.mode = "disabled";
+      });
+    };
   }, [selectedSubtitleUrl]);
 
   // =========================
@@ -229,10 +262,11 @@ export default function Player({
         {selectedSubtitleUrl && (
           <track
             key={selectedSubtitleUrl} // 🔥 fuerza re-render REAL
-            src={selectedSubtitleUrl}
+            ref={trackRef}
+            src={normalizeSubtitleUrl(selectedSubtitleUrl)}
             kind="subtitles"
-            srcLang="es"
-            label="Español"
+            srcLang={getTrackLangCode(selectedSubtitle?.lang || "")}
+            label={getLangLabel(selectedSubtitle?.lang || "Subtitles")}
             default
           />
         )}
@@ -299,6 +333,16 @@ export default function Player({
 
               {subtitleMenuOpen && (
                 <div className="absolute bottom-12 right-0 w-52 bg-black/90 rounded-xl border border-white/10" onClick={(e) => e.stopPropagation()} >
+                  <button
+                    onClick={() => {
+                      setSelectedSubtitleUrl(null);
+                      setSubtitleMenuOpen(false);
+                    }}
+                    className="flex justify-between w-full px-3 py-2 text-sm"
+                  >
+                    Off
+                    {!selectedSubtitleUrl && <Check size={14} />}
+                  </button>
                   {subtitles.map((s, i) => (
                     <button
                       key={i}

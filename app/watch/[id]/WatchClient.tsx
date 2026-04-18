@@ -2,13 +2,24 @@
 
 import { useEffect, useState } from "react";
 import Player from "@/app/player";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, Calendar, Flame, Globe, Star } from "lucide-react";
+
+type Movie = {
+  title: string;
+  release_date?: string;
+  backdrop_path?: string;
+  poster_path?: string;
+  overview?: string;
+  vote_average?: number;
+  original_language?: string;
+  popularity?: number;
+};
 
 export default function WatchClient({ id }: { id: string }) {
   const router = useRouter();
 
-  const [movie, setMovie] = useState<any>(null);
+  const [movie, setMovie] = useState<Movie | null>(null);
   const [stream, setStream] = useState<string | null>(null);
   const [subtitles, setSubtitles] = useState<{ url: string; lang: string }[]>(
     [],
@@ -21,7 +32,22 @@ export default function WatchClient({ id }: { id: string }) {
       .then((data) => setMovie(data));
   }, [id]);
 
+  const mergeSubtitles = (
+    primary: { url: string; lang: string }[] = [],
+    secondary: { url: string; lang: string }[] = [],
+  ) => {
+    const seen = new Set<string>();
+
+    return [...primary, ...secondary].filter((subtitle) => {
+      if (!subtitle?.url || seen.has(subtitle.url)) return false;
+      seen.add(subtitle.url);
+      return true;
+    });
+  };
+
   const handlePlay = async () => {
+    if (!movie) return;
+
     setLoadingStream(true);
 
     try {
@@ -40,7 +66,9 @@ export default function WatchClient({ id }: { id: string }) {
       console.log("SUBS FILTRADOS:", subsData);
 
       setStream(playData.stream);
-      setSubtitles(subsData.subtitles || []);
+      setSubtitles(
+        mergeSubtitles(playData.subtitles || [], subsData.subtitles || []),
+      );
     } catch (e) {
       console.error("play error", e);
     }
@@ -78,6 +106,7 @@ export default function WatchClient({ id }: { id: string }) {
       <div className="relative w-full h-[55vh] sm:h-[70vh]">
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          alt={movie.title}
           className="w-full h-full object-cover"
         />
 
@@ -125,6 +154,7 @@ export default function WatchClient({ id }: { id: string }) {
         <div className="flex justify-center md:block">
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
             className="rounded-xl w-[180px] sm:w-full"
           />
         </div>
@@ -151,7 +181,7 @@ export default function WatchClient({ id }: { id: string }) {
 
             <div className="flex items-center gap-2">
               <Flame size={16} className="text-red-400" />
-              <span>{Math.round(movie.popularity)}</span>
+              <span>{Math.round(movie.popularity || 0)}</span>
             </div>
           </div>
 

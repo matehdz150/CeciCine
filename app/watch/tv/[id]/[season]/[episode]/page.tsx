@@ -13,29 +13,43 @@ export default function WatchTVPage() {
     { url: string; lang: string }[]
   >([]);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/immutability
-    load();
-  }, [id, season, episode]);
+  const mergeSubtitles = (
+    primary: { url: string; lang: string }[] = [],
+    secondary: { url: string; lang: string }[] = [],
+  ) => {
+    const seen = new Set<string>();
 
-  const load = async () => {
-    try {
-      const [playRes, subsRes] = await Promise.all([
-        fetch(
-          `/api/play-tv?tmdbId=${id}&season=${season}&episode=${episode}`
-        ),
-        fetch(`/api/subtitles?tmdbId=${id}`),
-      ]);
-
-      const playData = await playRes.json();
-      const subsData = await subsRes.json();
-
-      setStream(playData.stream);
-      setSubtitles(subsData.subtitles || []);
-    } catch (e) {
-      console.error(e);
-    }
+    return [...primary, ...secondary].filter((subtitle) => {
+      if (!subtitle?.url || seen.has(subtitle.url)) return false;
+      seen.add(subtitle.url);
+      return true;
+    });
   };
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const [playRes, subsRes] = await Promise.all([
+          fetch(
+            `/api/play-tv?tmdbId=${id}&season=${season}&episode=${episode}`
+          ),
+          fetch(`/api/subtitles?tmdbId=${id}`),
+        ]);
+
+        const playData = await playRes.json();
+        const subsData = await subsRes.json();
+
+        setStream(playData.stream);
+        setSubtitles(
+          mergeSubtitles(playData.subtitles || [], subsData.subtitles || []),
+        );
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    void load();
+  }, [episode, id, season]);
 
   if (!stream) {
     return (

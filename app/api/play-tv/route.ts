@@ -41,6 +41,11 @@ export async function GET(req: NextRequest) {
     return Response.json(cache.get(cacheKey));
   }
 
+  const extractorServiceUrls = getExtractorServiceUrls();
+
+  console.log("🧩 extractor TV env raw:", process.env.EXTRACTOR_SERVICE_URL ?? "(unset)");
+  console.log("🧩 extractor TV candidates:", extractorServiceUrls);
+
   // 🔥 providers TV (adaptados)
   const providers = [
     (id: string, s: string, e: string) => `https://www.vidking.net/embed/tv/${id}/${s}/${e}`,
@@ -53,7 +58,6 @@ export async function GET(req: NextRequest) {
 
   for (const buildUrl of providers) {
     const url = buildUrl(tmdbId, season, episode);
-    const extractorServiceUrls = getExtractorServiceUrls();
 
     console.log("🔍 probando TV:", url);
 
@@ -74,12 +78,16 @@ export async function GET(req: NextRequest) {
           });
 
           if (!response.ok) {
+            const errorBody = await response.text().catch(() => "");
             console.log(
               "❌ extractor TV status:",
               response.status,
               response.statusText,
               extractorUrl,
             );
+            if (errorBody) {
+              console.log("❌ extractor TV body:", errorBody.slice(0, 500));
+            }
             continue;
           }
 
@@ -100,6 +108,9 @@ export async function GET(req: NextRequest) {
               ? extractorError.message
               : extractorError,
           );
+          if (extractorError instanceof Error && extractorError.stack) {
+            console.log("💀 extractor TV stack:", extractorError.stack);
+          }
         }
       }
 

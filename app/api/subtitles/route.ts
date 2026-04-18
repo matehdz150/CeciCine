@@ -20,7 +20,7 @@ type WyzieSubtitle = {
 
 type CleanSubtitle = {
   url: string;
-  lang: "es" | "en";
+  lang: string;
   score: number;
 };
 
@@ -148,16 +148,18 @@ export async function GET(req: NextRequest) {
     isRelevantSubtitle(s, title, year)
   );
 
+  const source = filtered.length > 0 ? filtered : data;
+
   // =========================
   // 🧠 MAP SAFE
   // =========================
-  const subtitles: CleanSubtitle[] = filtered
+  const subtitles: CleanSubtitle[] = source
     .filter((s): s is Required<Pick<WyzieSubtitle, "url" | "language">> =>
       Boolean(s.url && s.language)
     )
     .map((s) => ({
       url: s.url,
-      lang: s.language === "es" ? "es" : "en",
+      lang: s.language,
       score: getScore(s),
     }));
 

@@ -38,6 +38,11 @@ export async function GET(req: NextRequest) {
     return Response.json(cache.get(tmdbId));
   }
 
+  const extractorServiceUrls = getExtractorServiceUrls();
+
+  console.log("🧩 extractor env raw:", process.env.EXTRACTOR_SERVICE_URL ?? "(unset)");
+  console.log("🧩 extractor candidates:", extractorServiceUrls);
+
   // 🥇 mejor ordenados (más rápidos primero)
   const providers = [
     // 🥇 los que ya sabes que jalan
@@ -65,7 +70,6 @@ export async function GET(req: NextRequest) {
 
   for (const buildUrl of providers) {
     const url = buildUrl(tmdbId);
-    const extractorServiceUrls = getExtractorServiceUrls();
 
     console.log("🔍 probando:", url);
 
@@ -89,12 +93,16 @@ export async function GET(req: NextRequest) {
           });
 
           if (!response.ok) {
+            const errorBody = await response.text().catch(() => "");
             console.log(
               "❌ extractor status:",
               response.status,
               response.statusText,
               extractorUrl,
             );
+            if (errorBody) {
+              console.log("❌ extractor body:", errorBody.slice(0, 500));
+            }
             continue;
           }
 
@@ -115,6 +123,9 @@ export async function GET(req: NextRequest) {
               ? extractorError.message
               : extractorError,
           );
+          if (extractorError instanceof Error && extractorError.stack) {
+            console.log("💀 extractor stack:", extractorError.stack);
+          }
         }
       }
 
