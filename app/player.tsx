@@ -36,6 +36,19 @@ type SubtitleItem = {
   lang: string;
 };
 
+type FullscreenElement = HTMLElement & {
+  webkitRequestFullscreen?: () => Promise<void> | void;
+};
+
+type FullscreenVideo = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void;
+};
+
+type FullscreenDocument = Document & {
+  webkitExitFullscreen?: () => Promise<void> | void;
+  webkitFullscreenElement?: Element | null;
+};
+
 function normalizeSubtitleUrl(url: string) {
   if (url.startsWith("/api/subtitle")) return url;
   return `/api/subtitle?url=${encodeURIComponent(url)}`;
@@ -60,6 +73,8 @@ export default function Player({
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const trackRef = useRef<HTMLTrackElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const isSeekingRef = useRef(false);
 
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true); // 🔥 START MUTED
@@ -104,14 +119,22 @@ export default function Player({
   }, [src]);
 
   useEffect(() => {
+    const fullscreenDocument = document as FullscreenDocument;
+
     const handleFullscreenChange = () => {
-      setIsFullscreen(Boolean(document.fullscreenElement));
+      setIsFullscreen(
+        Boolean(
+          document.fullscreenElement || fullscreenDocument.webkitFullscreenElement,
+        ),
+      );
     };
 
     document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
 
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
     };
   }, []);
 
@@ -167,21 +190,82 @@ export default function Player({
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
+    const percent = Math.min(Math.max((e.clientX - rect.left) / rect.width, 0), 1);
 
     if (videoRef.current?.duration) {
       videoRef.current.currentTime = percent * videoRef.current.duration;
     }
   };
 
+  const seekToClientX = (clientX: number) => {
+    const video = videoRef.current;
+    const progressBar = progressBarRef.current;
+
+    if (!video?.duration || !progressBar) return;
+
+    const rect = progressBar.getBoundingClientRect();
+    const percent = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+    const nextTime = percent * video.duration;
+
+    video.currentTime = nextTime;
+    setCurrentTime(nextTime);
+    setProgress(percent);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isSeekingRef.current) return;
+    seekToClientX(event.clientX);
+  };
+
+  const stopSeeking = (event: React.PointerEvent<HTMLDivElement>) => {
+    isSeekingRef.current = false;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+  };
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    isSeekingRef.current = true;
+    seekToClientX(event.clientX);
+    setShowControls(true);
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
   const toggleFullscreen = async () => {
-    const el = containerRef.current;
+    const el = containerRef.current as FullscreenElement | null;
+    const video = videoRef.current as FullscreenVideo | null;
+    const fullscreenDocument = document as FullscreenDocument;
+
     if (!el) return;
 
-    if (!document.fullscreenElement) {
-      await el.requestFullscreen();
-    } else {
-      await document.exitFullscreen();
+    try {
+      if (
+        document.fullscreenElement ||
+        fullscreenDocument.webkitFullscreenElement
+      ) {
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+          return;
+        }
+
+        if (fullscreenDocument.webkitExitFullscreen) {
+          await fullscreenDocument.webkitExitFullscreen();
+        }
+        return;
+      }
+
+      if (el.requestFullscreen) {
+        await el.requestFullscreen();
+        return;
+      }
+
+      if (el.webkitRequestFullscreen) {
+        await el.webkitRequestFullscreen();
+        return;
+      }
+
+      video?.webkitEnterFullscreen?.();
+    } catch (error) {
+      console.error("fullscreen error", error);
     }
   };
 
@@ -293,8 +377,14 @@ export default function Player({
       >
         {/* PROGRESS */}
         <div
+          ref={progressBarRef}
           className="absolute bottom-16 left-4 right-4 h-2 bg-white/30 rounded-full"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={stopSeeking}
+          onPointerCancel={stopSeeking}
           onClick={handleSeek}
+          style={{ touchAction: "none" }}
         >
           <div
             className="h-full bg-white rounded-full"
