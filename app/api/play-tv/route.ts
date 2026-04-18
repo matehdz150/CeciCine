@@ -1,5 +1,8 @@
 import { NextRequest } from "next/server";
-import { buildExtractorUrl } from "@/lib/extractorService";
+import {
+  buildExtractorUrl,
+  getExtractorServiceUrls,
+} from "@/lib/extractorService";
 import { getWyzieSubs } from "@/lib/getSubs";
 
 type Subtitle = {
@@ -50,6 +53,7 @@ export async function GET(req: NextRequest) {
 
   for (const buildUrl of providers) {
     const url = buildUrl(tmdbId, season, episode);
+    const extractorServiceUrls = getExtractorServiceUrls();
 
     console.log("🔍 probando TV:", url);
 
@@ -57,10 +61,52 @@ export async function GET(req: NextRequest) {
       const controller = new AbortController();
       setTimeout(() => controller.abort(), 25000);
 
-      // 🔥 USAR TU MICROSERVICIO EXTRACTOR
-      const data = await fetch(buildExtractorUrl(url), {
-        signal: controller.signal,
-      }).then((r) => r.json() as Promise<ExtractorResponse>);
+      let data: ExtractorResponse | null = null;
+
+      for (const extractorServiceUrl of extractorServiceUrls) {
+        const extractorUrl = buildExtractorUrl(extractorServiceUrl, url);
+
+        try {
+          console.log("🛰️ extractor TV:", extractorUrl);
+
+          const response = await fetch(extractorUrl, {
+            signal: controller.signal,
+          });
+
+          if (!response.ok) {
+            console.log(
+              "❌ extractor TV status:",
+              response.status,
+              response.statusText,
+              extractorUrl,
+            );
+            continue;
+          }
+
+          data = (await response.json()) as ExtractorResponse;
+          break;
+        } catch (extractorError: unknown) {
+          if (
+            extractorError instanceof Error &&
+            extractorError.name === "AbortError"
+          ) {
+            throw extractorError;
+          }
+
+          console.log(
+            "💀 extractor TV fetch failed:",
+            extractorUrl,
+            extractorError instanceof Error
+              ? extractorError.message
+              : extractorError,
+          );
+        }
+      }
+
+      if (!data) {
+        console.log("❌ extractor TV unavailable para:", url);
+        continue;
+      }
 
       console.log("📦 extractor TV:", data);
 
