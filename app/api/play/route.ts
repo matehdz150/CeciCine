@@ -23,8 +23,27 @@ type ExtractorResponse = {
   subtitles?: string[];
 };
 
-// 🔥 cache simple (puedes cambiar a Redis después)
-const cache = new Map<string, PlayResult>();
+type CacheEntry = {
+  data: PlayResult;
+  expiresAt: number;
+};
+
+const CACHE_TTL_MS = 1000 * 60 * 60 * 2; // 2 horas
+
+// 🔥 cache simple con TTL (puedes cambiar a Redis después)
+const cache = new Map<string, CacheEntry>();
+
+setInterval(() => {
+  const now = Date.now();
+
+  for (const [key, value] of cache.entries()) {
+    if (now >= value.expiresAt) {
+      cache.delete(key);
+    }
+  }
+
+  console.log("🧹 cache cleaned:", cache.size);
+}, 1000 * 60 * 30);
 
 export async function GET(req: NextRequest) {
   const tmdbId = req.nextUrl.searchParams.get("tmdbId");
@@ -34,9 +53,16 @@ export async function GET(req: NextRequest) {
   }
 
   // ⚡ CACHE HIT
-  if (cache.has(tmdbId)) {
-    console.log("⚡ cache hit:", tmdbId);
-    return Response.json(cache.get(tmdbId));
+  const cached = cache.get(tmdbId);
+
+  if (cached) {
+    if (Date.now() < cached.expiresAt) {
+      console.log("⚡ cache hit:", tmdbId);
+      return Response.json(cached.data);
+    }
+
+    console.log("🗑️ cache expired:", tmdbId);
+    cache.delete(tmdbId);
   }
 
   const extractorServiceUrls = getExtractorServiceUrls();
@@ -174,7 +200,10 @@ export async function GET(req: NextRequest) {
       };
 
       // 💾 guardar cache
-      cache.set(tmdbId, result);
+      cache.set(tmdbId, {
+        data: result,
+        expiresAt: Date.now() + CACHE_TTL_MS,
+      });
 
       return Response.json(result);
     } catch (e: unknown) {
